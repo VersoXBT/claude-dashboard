@@ -1,0 +1,22 @@
+.vscode
+.DS_Store
+node_modules/
+dist/
+.output/
+.vinxi/
+.env
+.env.*
+.claude/settings.local.json
+**/agent-memory/
+.playwright-mcp/
+playwright-report/
+test-results/
+coverage/
+blob-report/
+**/e2e/screenshots/
+docs/marketing/
+scripts/
+
+# Claude Code internal files
+.claude/
+CLAUDE.md
