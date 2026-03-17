@@ -1,0 +1,194 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Neutral gray scale (dark mode defaults) */
+  --color-gray-50: #F5F5F4;
+  --color-gray-100: #E5E5E3;
+  --color-gray-200: #D4D4D1;
+  --color-gray-300: #A1A09E;
+  --color-gray-400: #737370;
+  --color-gray-500: #57574F;
+  --color-gray-600: #444444;
+  --color-gray-700: #363636;
+  --color-gray-800: #2A2A2A;
+  --color-gray-850: #262626;
+  --color-gray-900: #1A1A1A;
+  --color-gray-950: #141414;
+
+  /* Claude brand accent (warm amber-orange) */
+  --color-brand-300: #F6C87A;
+  --color-brand-400: #E68A2E;
+  --color-brand-500: #D97706;
+  --color-brand-600: #B45309;
+  --color-brand-700: #92400E;
+
+  /* Semantic colors */
+  --color-success: #10B981;
+  --color-info: #6366F1;
+  --color-error: #EF4444;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --color-gray-50: #1C1C1A;
+  --color-gray-100: #1C1C1A;
+  --color-gray-200: #57574F;
+  --color-gray-300: #57574F;
+  --color-gray-400: #737370;
+  --color-gray-500: #A1A09E;
+  --color-gray-600: #D4D4D1;
+  --color-gray-700: #E5E5E3;
+  --color-gray-800: #F5F5F4;
+  --color-gray-850: #FFFFFF;
+  --color-gray-900: #FAFAF9;
+  --color-gray-950: #FAFAF9;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-gray-900);
+  color: var(--color-gray-50);
+  transition: background-color 150ms ease, color 150ms ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Typography Enhancement --- */
+
+h1, h2, h3, .heading {
+  letter-spacing: -0.02em;
+  text-rendering: optimizeLegibility;
+}
+
+.mono-data {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* --- Enhanced Visual Depth --- */
+
+/* Enhanced card depth */
+.card-elevated {
+  background: linear-gradient(145deg, var(--color-gray-800) 0%, var(--color-gray-900) 100%);
+  border: 1px solid var(--color-gray-700);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.card-elevated:hover {
+  border-color: var(--color-gray-600);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 8px 24px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+}
+
+/* Brand accent glow */
+.glow-brand {
+  box-shadow: 0 0 24px rgba(217, 119, 6, 0.12);
+}
+
+/* Claude gradient - for special headers and hero sections */
+.claude-gradient {
+  background: linear-gradient(135deg, var(--color-brand-500) 0%, var(--color-brand-400) 50%, var(--color-brand-300) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Stat card with left accent */
+.stat-accent {
+  border-left: 3px solid var(--color-brand-500);
+  background: linear-gradient(145deg, var(--color-gray-800) 0%, var(--color-gray-900) 100%);
+}
+
+/* Chart container accent line */
+.chart-accent::before {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-brand-500), var(--color-brand-400), transparent);
+  border-radius: 1px;
+  margin-bottom: 0.5rem;
+}
+
+/* Smooth page transitions */
+.page-enter {
+  animation: fadeSlideIn 200ms ease-out;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Better scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-gray-900); }
+::-webkit-scrollbar-thumb { background: var(--color-gray-600); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-gray-500); }
+
+/* Active nav glow */
+.nav-active {
+  position: relative;
+}
+.nav-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: var(--color-brand-500);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Tooltip styling */
+.chart-tooltip {
+  background: var(--color-gray-800) !important;
+  border: 1px solid var(--color-gray-700) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+  padding: 8px 12px !important;
+  color: var(--color-gray-300) !important;
+}
+
+/* Status pulse */
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.status-active {
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+/* Stat card hover lift */
+.stat-card-hover {
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.stat-card-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border-color: var(--color-gray-600);
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
