@@ -272,7 +272,7 @@ export function ContributionHeatmap({
       {/* Tooltip rendered via portal to escape overflow boundaries */}
       {tooltip && createPortal(
         <div
-          className="pointer-events-none fixed z-50 rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-xs shadow-lg"
+          className="pointer-events-none fixed z-50 rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-xs shadow-xl shadow-black/40"
           style={{
             left: tooltip.x,
             top: tooltip.y,

@@ -20,7 +20,7 @@ export function SessionCard({ session }: { session: SessionSummary }) {
       to="/sessions/$sessionId"
       params={{ sessionId: session.sessionId }}
       search={{ project: session.projectPath }}
-      className="group block rounded-xl border border-gray-800 bg-gray-900/50 p-4 transition-all hover:border-gray-700 hover:bg-gray-900"
+      className="group block rounded-xl border border-gray-800 bg-gray-900/50 p-4 transition-all duration-150 hover:border-gray-700 hover:bg-gray-900 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">

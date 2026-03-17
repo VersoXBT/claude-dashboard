@@ -11,6 +11,9 @@ import { ModelUsageChart } from '@/features/stats/ModelUsageChart'
 import { HourlyDistribution } from '@/features/stats/HourlyDistribution'
 import { CostTrendChart } from '@/features/stats/CostTrendChart'
 import { CacheEfficiencyPanel } from '@/features/stats/CacheEfficiencyPanel'
+import { SessionComplexityChart } from '@/features/stats/SessionComplexityChart'
+import { WeeklyComparisonPanel } from '@/features/stats/WeeklyComparisonPanel'
+import { ModelSwitchingChart } from '@/features/stats/ModelSwitchingChart'
 import { ProjectAnalytics } from '@/features/project-analytics/ProjectAnalytics'
 import { formatDuration, formatTokenCount, formatUSD } from '@/lib/utils/format'
 import {
@@ -264,6 +267,10 @@ function StatsOverview({
         <HourlyDistribution hourCounts={stats.hourCounts} />
       </div>
 
+      <div className="mt-4">
+        <ModelSwitchingChart data={stats.modelUsage} />
+      </div>
+
       {cost && (
         <>
           <div className="mt-4">
@@ -282,6 +289,14 @@ function StatsOverview({
           </div>
         </>
       )}
+
+      <div className="mt-4">
+        <WeeklyComparisonPanel data={stats.dailyActivity} />
+      </div>
+
+      <div className="mt-4">
+        <SessionComplexityChart data={stats.dailyActivity} />
+      </div>
     </>
   )
 }
@@ -298,7 +313,7 @@ function StatCard({
   return (
     <div className="rounded-xl border border-gray-800 border-l-2 border-l-brand-500 bg-gray-900/50 p-4">
       <p className="text-xs text-gray-400">{label}</p>
-      <p className="mt-1 text-xl font-bold text-gray-100">{value}</p>
+      <p className="mt-1 text-2xl font-bold tracking-tight text-gray-100" style={{ fontVariantNumeric: 'tabular-nums' }}>{value}</p>
       {sub && <p className="mt-0.5 text-xs text-gray-500">{sub}</p>}
     </div>
   )
