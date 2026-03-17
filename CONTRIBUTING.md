@@ -1,64 +1,62 @@
-# Contributing to Claude Dashboard
+# Contributing to Claude Session Dashboard
 
-Thanks for your interest in contributing! This guide will help you get started.
+Thanks for your interest in contributing! This project is open to contributions of all kinds.
 
-## Quick Start
+## Getting Started
 
-1. Fork the repository
-2. Clone your fork:
-   ```bash
-   git clone https://github.com/<your-username>/claude-dashboard.git
-   cd claude-dashboard
-   ```
-3. Install dependencies:
-   ```bash
-   pnpm install
-   ```
-4. Start the dev server:
-   ```bash
-   pnpm dev
-   ```
+```bash
+git clone https://github.com/dlupiak/claude-session-dashboard.git
+cd claude-session-dashboard/apps/web
+npm install
+npm run dev
+```
 
-## Prerequisites
+The dev server runs on http://localhost:3000. It reads session data from `~/.claude` (read-only).
 
-- Node.js 18+
-- pnpm 9+
+## Project Structure
+
+The project uses **Vertical Slice Architecture** — code is organized by feature, not by layer:
+
+```
+apps/web/src/
+  routes/          # File-based routes (TanStack Router)
+  features/        # Feature slices (sessions, stats, settings, etc.)
+  lib/             # Scanner, parsers, cache, utilities
+  components/      # Shared UI components
+```
+
+Each feature slice contains its own server functions, queries, and UI components.
 
 ## Development Commands
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start dev server with Turbopack |
-| `pnpm build` | Production build |
-| `pnpm lint` | Run ESLint |
-| `pnpm typecheck` | TypeScript type checking |
+```bash
+npm run dev          # Dev server
+npm run typecheck    # TypeScript checking
+npm run lint         # ESLint
+npm run test         # Unit tests (Vitest)
+npm run build        # Production build
+```
 
-## Pull Request Process
+## Making Changes
 
-1. Create a feature branch from `main`:
-   ```bash
-   git checkout -b feat/my-feature
-   ```
+1. Fork the repo and create a branch: `git checkout -b feature/your-feature`
 2. Make your changes
-3. Ensure `pnpm build` passes without errors
-4. Commit using [conventional commits](https://www.conventionalcommits.org/):
-   ```
-   feat: add new chart to overview page
-   fix: correct session count in sidebar
-   refactor: extract shared date formatting utils
-   docs: update README installation steps
-   ```
-5. Push and open a Pull Request against `main`
+3. Run quality checks: `npm run typecheck && npm run lint && npm run build`
+4. Commit with a descriptive message
+5. Open a Pull Request
 
-## Code Style
+## Conventions
 
-- TypeScript strict mode
-- Functional components with hooks
-- Immutable data patterns (no mutation)
-- Small, focused files (under 800 lines)
-- Use existing shadcn/ui components where possible
-- Follow the patterns in existing pages for consistency
+- **TypeScript** — no `any` types, use Zod for runtime validation
+- **Tailwind CSS v4** — utility-first, CSS-first configuration
+- **TanStack Query** — all data fetching through React Query hooks
+- **Named exports** — prefer named exports over default exports
+- **Dark theme** — `bg-gray-950` body, `border-gray-800` borders
 
-## Reporting Issues
+## Good First Issues
 
-Use [GitHub Issues](https://github.com/VersoXBT/claude-dashboard/issues) with the provided templates.
+Check the [good first issue](https://github.com/dlupiak/claude-session-dashboard/labels/good%20first%20issue) label for beginner-friendly tasks.
+
+## Questions?
+
+Open a [Discussion](https://github.com/dlupiak/claude-session-dashboard/discussions) or comment on the issue you're working on.

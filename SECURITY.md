@@ -1,27 +1,25 @@
 # Security Policy
 
-## Local-Only Design
-
-Claude Dashboard is designed to run entirely on your local machine. It reads Claude Code session data from your local `~/.claude` directory. **No data is ever sent to any external server.**
-
-All processing happens locally:
-- Data is read from your filesystem
-- The dashboard runs on `localhost`
-- No analytics, telemetry, or external API calls
-
 ## Supported Versions
 
-| Version | Supported |
-|---------|-----------|
-| 0.1.x   | Yes       |
+Only the latest release receives security updates.
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please report it responsibly:
+**Please do not report security vulnerabilities through public GitHub issues.**
 
-1. **Do not** open a public GitHub issue
-2. Email the maintainer or open a [GitHub Security Advisory](https://github.com/VersoXBT/claude-dashboard/security/advisories/new)
-3. Include a description of the vulnerability and steps to reproduce
-4. Allow reasonable time for a fix before public disclosure
+Instead, use [GitHub Security Advisories](https://github.com/dlupiak/claude-session-dashboard/security/advisories/new) to report them privately.
 
-We aim to acknowledge reports within 48 hours and provide a fix within 7 days for critical issues.
+Include:
+- Description of the vulnerability
+- Steps to reproduce
+- Suggested fix (if any)
+
+I'll acknowledge reports within 48 hours and provide an action plan within 7 days.
+
+## Scope
+
+This is a **local-only, read-only** dashboard — no server, no auth, no external network requests. Security concerns are limited to:
+- Path traversal outside `~/.claude`
+- XSS from crafted session data
+- Dependency vulnerabilities
