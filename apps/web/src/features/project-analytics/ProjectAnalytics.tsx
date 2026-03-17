@@ -1,12 +1,42 @@
+import { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { projectAnalyticsQuery } from './project-analytics.queries'
 import { ProjectTable } from './ProjectTable'
 import { formatDuration } from '@/lib/utils/format'
 import { usePrivacy } from '@/features/privacy/PrivacyContext'
+import { statsQuery } from '@/features/stats/stats.queries'
+import { useSessionCost } from '@/features/cost-estimation/useSessionCost'
+import type { TokenUsage } from '@/lib/parsers/types'
+
+const EMPTY_TOKENS_BY_MODEL: Record<string, TokenUsage> = {}
 
 export function ProjectAnalytics() {
   const { anonymizeProjectName } = usePrivacy()
   const { data, isLoading } = useQuery(projectAnalyticsQuery)
+  const { data: stats } = useQuery(statsQuery)
+
+  // Build global tokensByModel for cost calculation
+  const tokensByModel = useMemo(() => {
+    if (!stats) return EMPTY_TOKENS_BY_MODEL
+    const result: Record<string, TokenUsage> = {}
+    for (const [model, usage] of Object.entries(stats.modelUsage)) {
+      result[model] = {
+        inputTokens: usage.inputTokens,
+        outputTokens: usage.outputTokens,
+        cacheReadInputTokens: usage.cacheReadInputTokens,
+        cacheCreationInputTokens: usage.cacheCreationInputTokens,
+      }
+    }
+    return result
+  }, [stats])
+
+  const { cost } = useSessionCost(tokensByModel)
+
+  // Compute estimated cost per message from global stats
+  const costPerMessage = useMemo(() => {
+    if (!cost || !stats || stats.totalMessages === 0) return 0
+    return cost.totalUSD / stats.totalMessages
+  }, [cost, stats])
 
   if (isLoading) {
     return (
@@ -63,7 +93,7 @@ export function ProjectAnalytics() {
       </div>
 
       {/* Project table */}
-      <ProjectTable projects={projects} />
+      <ProjectTable projects={projects} costPerMessage={costPerMessage} />
     </div>
   )
 }

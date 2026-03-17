@@ -1,5 +1,5 @@
 import { queryOptions, keepPreviousData } from '@tanstack/react-query'
-import { getSessionList, getActiveSessionList, getPaginatedSessions } from './sessions.api'
+import { getSessionList, getActiveSessionList, getPaginatedSessions, getRecentPrompts } from './sessions.api'
 
 export const sessionListQuery = queryOptions({
   queryKey: ['sessions', 'list'],
@@ -29,3 +29,9 @@ export function paginatedSessionListQuery(params: PaginatedSessionParams) {
     refetchInterval: 30_000,
   })
 }
+
+export const recentPromptsQuery = queryOptions({
+  queryKey: ['sessions', 'recentPrompts'],
+  queryFn: () => getRecentPrompts(),
+  refetchInterval: 60_000,
+})

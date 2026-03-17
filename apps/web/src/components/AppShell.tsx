@@ -81,7 +81,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <a
-                href="https://github.com/dlupiak/claude-session-dashboard"
+                href="https://github.com/VersoXBT/claude-dashboard"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-gray-300 transition-colors"

@@ -1,25 +1,27 @@
 import { useState, useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
-import { formatDuration, formatRelativeTime } from '@/lib/utils/format'
+import { formatDuration, formatRelativeTime, formatUSD } from '@/lib/utils/format'
 import { usePrivacy } from '@/features/privacy/PrivacyContext'
 import type { ProjectAnalytics } from './project-analytics.api'
 
-type SortField = 'projectName' | 'totalSessions' | 'totalMessages' | 'totalDurationMs' | 'lastSessionAt'
+type SortField = 'projectName' | 'totalSessions' | 'totalMessages' | 'totalDurationMs' | 'lastSessionAt' | 'estimatedCost'
 type SortDir = 'asc' | 'desc'
 
 interface ProjectTableProps {
   projects: ProjectAnalytics[]
+  costPerMessage: number
 }
 
 const COLUMNS: { key: SortField; label: string; align?: 'right' }[] = [
   { key: 'projectName', label: 'Project' },
   { key: 'totalSessions', label: 'Sessions', align: 'right' },
   { key: 'totalMessages', label: 'Messages', align: 'right' },
+  { key: 'estimatedCost', label: 'Est. Cost', align: 'right' },
   { key: 'totalDurationMs', label: 'Duration', align: 'right' },
   { key: 'lastSessionAt', label: 'Last Active', align: 'right' },
 ]
 
-export function ProjectTable({ projects }: ProjectTableProps) {
+export function ProjectTable({ projects, costPerMessage }: ProjectTableProps) {
   const { anonymizeProjectName } = usePrivacy()
   const [sortField, setSortField] = useState<SortField>('lastSessionAt')
   const [sortDir, setSortDir] = useState<SortDir>('desc')
@@ -38,6 +40,9 @@ export function ProjectTable({ projects }: ProjectTableProps) {
         case 'totalMessages':
           cmp = a.totalMessages - b.totalMessages
           break
+        case 'estimatedCost':
+          cmp = (a.totalMessages * costPerMessage) - (b.totalMessages * costPerMessage)
+          break
         case 'totalDurationMs':
           cmp = a.totalDurationMs - b.totalDurationMs
           break
@@ -48,7 +53,7 @@ export function ProjectTable({ projects }: ProjectTableProps) {
       return sortDir === 'asc' ? cmp : -cmp
     })
     return copy
-  }, [projects, sortField, sortDir])
+  }, [projects, sortField, sortDir, costPerMessage])
 
   function handleSort(field: SortField) {
     if (field === sortField) {
@@ -108,6 +113,11 @@ export function ProjectTable({ projects }: ProjectTableProps) {
               </td>
               <td className="px-4 py-3 text-right font-mono text-sm text-gray-300">
                 {project.totalMessages.toLocaleString()}
+              </td>
+              <td className="px-4 py-3 text-right font-mono text-sm text-gray-300">
+                {costPerMessage > 0
+                  ? `~${formatUSD(project.totalMessages * costPerMessage)}`
+                  : 'N/A'}
               </td>
               <td className="px-4 py-3 text-right font-mono text-sm text-gray-300">
                 {formatDuration(project.totalDurationMs)}

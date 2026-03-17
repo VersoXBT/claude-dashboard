@@ -1,10 +1,10 @@
-# Claude Session Dashboard
+# Claude Dashboard
 
-[![CI](https://github.com/dlupiak/claude-session-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/dlupiak/claude-session-dashboard/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/dlupiak/claude-session-dashboard/actions/workflows/codeql.yml/badge.svg)](https://github.com/dlupiak/claude-session-dashboard/actions/workflows/codeql.yml)
-[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/dlupiak/claude-session-dashboard)](https://securityscorecards.dev/viewer/?uri=github.com/dlupiak/claude-session-dashboard)
+[![CI](https://github.com/VersoXBT/claude-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/VersoXBT/claude-dashboard/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/VersoXBT/claude-dashboard/actions/workflows/codeql.yml/badge.svg)](https://github.com/VersoXBT/claude-dashboard/actions/workflows/codeql.yml)
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/VersoXBT/claude-dashboard)](https://securityscorecards.dev/viewer/?uri=github.com/VersoXBT/claude-dashboard)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/12094/badge)](https://www.bestpractices.dev/projects/12094)
-[![codecov](https://codecov.io/gh/dlupiak/claude-session-dashboard/graph/badge.svg)](https://codecov.io/gh/dlupiak/claude-session-dashboard)
+[![codecov](https://codecov.io/gh/VersoXBT/claude-dashboard/graph/badge.svg)](https://codecov.io/gh/VersoXBT/claude-dashboard)
 [![Socket](https://img.shields.io/badge/Socket-secured-green?logo=socket.dev)](https://socket.dev/npm/package/claude-session-dashboard)
 [![npm version](https://img.shields.io/npm/v/claude-session-dashboard)](https://www.npmjs.com/package/claude-session-dashboard)
 [![npm downloads](https://img.shields.io/npm/dm/claude-session-dashboard)](https://www.npmjs.com/package/claude-session-dashboard)
@@ -12,6 +12,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A read-only, local observability dashboard for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) sessions. Scans your `~/.claude` directory to visualize session history, tool usage, token consumption, cost estimates, and activity trends -- all without sending data anywhere.
+
+Based on [claude-session-dashboard](https://github.com/dlupiak/claude-session-dashboard) by dlupiak.
 
 ```bash
 npx claude-session-dashboard
@@ -104,8 +106,8 @@ claude-dashboard
 ### From source
 
 ```bash
-git clone https://github.com/dlupiak/claude-session-dashboard.git
-cd claude-session-dashboard/apps/web
+git clone https://github.com/VersoXBT/claude-dashboard.git
+cd claude-dashboard/apps/web
 npm install
 npm run build
 npm start
@@ -185,16 +187,16 @@ npm run e2e          # End-to-end tests (Playwright)
 
 ## Contributing
 
-Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for setup instructions and conventions. Check [good first issues](https://github.com/dlupiak/claude-session-dashboard/labels/good%20first%20issue) for beginner-friendly tasks.
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for setup instructions and conventions. Check [good first issues](https://github.com/VersoXBT/claude-dashboard/labels/good%20first%20issue) for beginner-friendly tasks.
 
 If you find this project useful, consider giving it a star -- it helps others discover it.
 
 ## Links
 
-- [GitHub](https://github.com/dlupiak/claude-session-dashboard)
+- [GitHub](https://github.com/VersoXBT/claude-dashboard)
 - [npm](https://www.npmjs.com/package/claude-session-dashboard)
-- [Issues](https://github.com/dlupiak/claude-session-dashboard/issues)
-- [Discussions](https://github.com/dlupiak/claude-session-dashboard/discussions)
+- [Issues](https://github.com/VersoXBT/claude-dashboard/issues)
+- [Discussions](https://github.com/VersoXBT/claude-dashboard/discussions)
 
 ## License
 

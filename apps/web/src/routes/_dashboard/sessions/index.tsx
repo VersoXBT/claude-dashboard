@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 import { SessionList } from '@/features/sessions/SessionList'
+import { RecentPromptsPanel } from '@/features/sessions/RecentPromptsPanel'
 
 const sessionsSearchSchema = z.object({
   page: z.number().int().min(1).default(1).catch(1),
@@ -24,6 +25,9 @@ function SessionsPage() {
       <p className="mt-1 text-sm text-gray-400">
         All Claude Code sessions from ~/.claude
       </p>
+      <div className="mt-6">
+        <RecentPromptsPanel />
+      </div>
       <div className="mt-6">
         <SessionList />
       </div>

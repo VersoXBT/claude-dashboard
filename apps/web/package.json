@@ -1,13 +1,14 @@
 {
-  "name": "claude-session-dashboard",
+  "name": "claude-dashboard",
   "version": "0.4.5",
   "description": "Local observability dashboard for Claude Code sessions",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://github.com/dlupiak/claude-session-dashboard",
+  "author": "VersoXBT",
+  "homepage": "https://github.com/VersoXBT/claude-dashboard",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dlupiak/claude-session-dashboard.git"
+    "url": "git+https://github.com/VersoXBT/claude-dashboard.git"
   },
   "keywords": [
     "claude",

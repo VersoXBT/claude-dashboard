@@ -1,7 +1,8 @@
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { scanAllSessions, getActiveSessions } from '@/lib/scanner/session-scanner'
-import type { SessionSummary } from '@/lib/parsers/types'
+import { parseHistory } from '@/lib/parsers/history-parser'
+import type { SessionSummary, HistoryEntry } from '@/lib/parsers/types'
 
 export const getSessionList = createServerFn({ method: 'GET' }).handler(
   async () => {
@@ -103,3 +104,9 @@ export const getPaginatedSessions = createServerFn({ method: 'GET' })
     const allSessions = await scanAllSessions()
     return paginateAndFilterSessions(allSessions, data)
   })
+
+export const getRecentPrompts = createServerFn({ method: 'GET' }).handler(
+  async (): Promise<HistoryEntry[]> => {
+    return parseHistory(20)
+  },
+)

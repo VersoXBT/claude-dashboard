@@ -9,6 +9,8 @@ import { ContributionHeatmap } from '@/features/stats/ContributionHeatmap'
 import { TokenTrendChart } from '@/features/stats/TokenTrendChart'
 import { ModelUsageChart } from '@/features/stats/ModelUsageChart'
 import { HourlyDistribution } from '@/features/stats/HourlyDistribution'
+import { CostTrendChart } from '@/features/stats/CostTrendChart'
+import { CacheEfficiencyPanel } from '@/features/stats/CacheEfficiencyPanel'
 import { ProjectAnalytics } from '@/features/project-analytics/ProjectAnalytics'
 import { formatDuration, formatTokenCount, formatUSD } from '@/lib/utils/format'
 import {
@@ -20,6 +22,7 @@ import {
 } from '@/lib/utils/export-utils'
 import { ExportDropdown } from '@/components/ExportDropdown'
 import { useSessionCost } from '@/features/cost-estimation/useSessionCost'
+import type { CostBreakdown } from '@/features/cost-estimation/cost-estimation.types'
 import type { TokenUsage, StatsCache } from '@/lib/parsers/types'
 
 const statsSearchSchema = z.object({
@@ -152,7 +155,7 @@ function StatsOverview({
 }: {
   stats: StatsCache | null | undefined
   isLoading: boolean
-  cost: { totalUSD: number } | null
+  cost: CostBreakdown | null
 }) {
   const { data: projectData } = useQuery(projectAnalyticsQuery)
 
@@ -260,6 +263,25 @@ function StatsOverview({
         <ModelUsageChart data={stats.modelUsage} />
         <HourlyDistribution hourCounts={stats.hourCounts} />
       </div>
+
+      {cost && (
+        <>
+          <div className="mt-4">
+            <CostTrendChart
+              data={stats.dailyModelTokens}
+              modelUsage={stats.modelUsage}
+              costBreakdown={cost}
+            />
+          </div>
+
+          <div className="mt-4">
+            <CacheEfficiencyPanel
+              modelUsage={stats.modelUsage}
+              costBreakdown={cost}
+            />
+          </div>
+        </>
+      )}
     </>
   )
 }
@@ -274,7 +296,7 @@ function StatCard({
   sub?: string
 }) {
   return (
-    <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-4">
+    <div className="rounded-xl border border-gray-800 border-l-2 border-l-brand-500 bg-gray-900/50 p-4">
       <p className="text-xs text-gray-400">{label}</p>
       <p className="mt-1 text-xl font-bold text-gray-100">{value}</p>
       {sub && <p className="mt-0.5 text-xs text-gray-500">{sub}</p>}
