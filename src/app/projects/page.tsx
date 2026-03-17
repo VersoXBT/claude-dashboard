@@ -50,15 +50,15 @@ function getDaysSinceActive(dateStr: string): number {
 
 function getActivityColor(dateStr: string): { dot: string; label: string } {
   const days = getDaysSinceActive(dateStr)
-  if (days <= 1) return { dot: "bg-emerald-500", label: "Active" }
-  if (days <= 7) return { dot: "bg-amber-500", label: "Recent" }
-  return { dot: "bg-red-500", label: "Stale" }
+  if (days <= 1) return { dot: "bg-[#D4714E]", label: "Active" }
+  if (days <= 7) return { dot: "bg-[#D4A04E]", label: "Recent" }
+  return { dot: "bg-[#C47A8E]", label: "Stale" }
 }
 
 function getTreemapFill(days: number): string {
-  if (days <= 1) return "#10b981"
-  if (days <= 7) return "#f59e0b"
-  return "#ef4444"
+  if (days <= 1) return "#D4714E"
+  if (days <= 7) return "#D4A04E"
+  return "#564F47"
 }
 
 interface TreemapNodeProps {
@@ -83,7 +83,7 @@ function CustomTreemapNode({ x, y, width, height, name, days }: TreemapNodeProps
         height={height}
         fill={fill}
         fillOpacity={0.85}
-        stroke="#18181b"
+        stroke="#1A1714"
         strokeWidth={2}
         rx={4}
       />
@@ -93,7 +93,7 @@ function CustomTreemapNode({ x, y, width, height, name, days }: TreemapNodeProps
           y={y + height / 2}
           textAnchor="middle"
           dominantBaseline="middle"
-          fill="#fff"
+          fill="#F5F0EB"
           fontSize={Math.min(12, width / 8)}
           fontWeight={500}
         >
@@ -113,10 +113,10 @@ function TreemapTooltipContent({ active, payload }: TreemapTooltipProps) {
   if (!active || !payload?.length) return null
   const data = payload[0].payload
   return (
-    <div className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-xs shadow-lg">
-      <p className="font-medium text-zinc-100">{data.name}</p>
-      <p className="text-zinc-400">{data.sessions} session{data.sessions !== 1 ? "s" : ""}</p>
-      <p className="text-zinc-400">
+    <div className="rounded-lg border border-[#3D3830] bg-[#2D2822] px-3 py-2 text-xs shadow-lg">
+      <p className="font-medium text-[#F5F0EB]">{data.name}</p>
+      <p className="text-[#B8AFA5]">{data.sessions} session{data.sessions !== 1 ? "s" : ""}</p>
+      <p className="text-[#B8AFA5]">
         {data.days === 0 ? "Active today" : `${data.days}d since last activity`}
       </p>
     </div>
@@ -137,15 +137,15 @@ export default function ProjectsPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-xl font-semibold text-zinc-100">Projects</h1>
-          <p className="text-sm text-zinc-500 mt-1">Project leaderboard and cross-project analytics</p>
+          <h1 className="text-xl font-semibold text-[#F5F0EB]">Projects</h1>
+          <p className="text-sm text-[#7A7267] mt-1">Project leaderboard and cross-project analytics</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
           {Array.from({ length: 4 }).map((_, i) => (
-            <Skeleton key={i} className="h-[120px] rounded-lg" />
+            <Skeleton key={i} className="h-[120px] rounded-lg bg-[#2D2822]" />
           ))}
         </div>
-        <Skeleton className="h-[400px] rounded-lg" />
+        <Skeleton className="h-[400px] rounded-lg bg-[#2D2822]" />
       </div>
     )
   }
@@ -168,8 +168,8 @@ export default function ProjectsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-semibold text-zinc-100">Projects</h1>
-        <p className="text-sm text-zinc-500 mt-1">Project leaderboard and cross-project analytics</p>
+        <h1 className="text-xl font-semibold text-[#F5F0EB]">Projects</h1>
+        <p className="text-sm text-[#7A7267] mt-1">Project leaderboard and cross-project analytics</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -199,25 +199,25 @@ export default function ProjectsPage() {
         />
       </div>
 
-      <Card className="bg-zinc-900/50 border-zinc-800">
+      <Card className="bg-[#231F1B]/50 border-[#3D3830]">
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium text-zinc-300">
+          <CardTitle className="text-sm font-medium text-[#F5F0EB]">
             Project Leaderboard
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4 pt-0">
           {rankedProjects.length === 0 ? (
-            <p className="text-sm text-zinc-500 text-center py-8">No projects found</p>
+            <p className="text-sm text-[#7A7267] text-center py-8">No projects found</p>
           ) : (
             <Table>
               <TableHeader>
-                <TableRow className="border-zinc-800 hover:bg-transparent">
-                  <TableHead className="text-zinc-400 w-16">#</TableHead>
-                  <TableHead className="text-zinc-400">Project</TableHead>
-                  <TableHead className="text-zinc-400 text-right">Sessions</TableHead>
-                  <TableHead className="text-zinc-400 text-right">Messages</TableHead>
-                  <TableHead className="text-zinc-400 text-right">Last Active</TableHead>
-                  <TableHead className="text-zinc-400 text-center">Status</TableHead>
+                <TableRow className="border-[#302C26] hover:bg-transparent bg-[#2D2822]">
+                  <TableHead className="text-[#B8AFA5] w-16">#</TableHead>
+                  <TableHead className="text-[#B8AFA5]">Project</TableHead>
+                  <TableHead className="text-[#B8AFA5] text-right">Sessions</TableHead>
+                  <TableHead className="text-[#B8AFA5] text-right">Messages</TableHead>
+                  <TableHead className="text-[#B8AFA5] text-right">Last Active</TableHead>
+                  <TableHead className="text-[#B8AFA5] text-center">Status</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -226,32 +226,32 @@ export default function ProjectsPage() {
                   return (
                     <TableRow
                       key={project.id}
-                      className="border-zinc-800/50 hover:bg-zinc-800/30"
+                      className={`border-[#302C26] hover:bg-[#2D2822] ${index % 2 === 0 ? "bg-[#231F1B]" : "bg-[#1E1B17]"}`}
                     >
-                      <TableCell className="text-zinc-500 font-mono text-xs">
+                      <TableCell className="text-[#7A7267] font-mono text-xs">
                         {index + 1}
                       </TableCell>
                       <TableCell>
                         <Link
                           href={`/projects/${encodeURIComponent(project.id)}`}
-                          className="text-zinc-100 hover:text-violet-400 transition-colors font-medium"
+                          className="text-[#F5F0EB] hover:text-[#D4714E] transition-colors font-medium"
                         >
                           {project.name}
                         </Link>
                       </TableCell>
-                      <TableCell className="text-right text-zinc-300 font-mono text-xs">
+                      <TableCell className="text-right text-[#B8AFA5] font-mono text-xs">
                         {formatNumber(project.sessionCount)}
                       </TableCell>
-                      <TableCell className="text-right text-zinc-300 font-mono text-xs">
+                      <TableCell className="text-right text-[#B8AFA5] font-mono text-xs">
                         {formatNumber(project.totalMessages)}
                       </TableCell>
-                      <TableCell className="text-right text-zinc-400 text-xs">
+                      <TableCell className="text-right text-[#7A7267] text-xs">
                         {getRelativeTime(project.lastActivity)}
                       </TableCell>
                       <TableCell className="text-center">
                         <div className="flex items-center justify-center gap-1.5">
                           <span className={`h-2 w-2 rounded-full ${activity.dot}`} />
-                          <span className="text-xs text-zinc-400">{activity.label}</span>
+                          <span className="text-xs text-[#B8AFA5]">{activity.label}</span>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -265,7 +265,7 @@ export default function ProjectsPage() {
 
       <ChartContainer
         title="Project Activity Treemap"
-        subtitle="Block size = session count, color = recency (green: recent, amber: >7d, red: >30d)"
+        subtitle="Block size = session count, color = recency (terracotta: active, amber: recent, muted: stale)"
         isEmpty={treemapData.length === 0}
         height="h-[350px]"
       >
@@ -273,7 +273,7 @@ export default function ProjectsPage() {
           <Treemap
             data={treemapData}
             dataKey="size"
-            stroke="#18181b"
+            stroke="#1A1714"
             content={<CustomTreemapNode x={0} y={0} width={0} height={0} name="" days={0} />}
           >
             <Tooltip content={<TreemapTooltipContent />} />

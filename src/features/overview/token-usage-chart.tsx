@@ -12,7 +12,8 @@ import {
   Legend,
 } from "recharts"
 import { ChartContainer } from "@/components/charts/chart-container"
-import { TOKEN_COLORS } from "@/components/charts/recharts-theme"
+import { TOKEN_COLORS, CHART_GRID_COLOR, CHART_AXIS_COLOR, TOOLTIP_STYLE } from "@/components/charts/recharts-theme"
+import { CLAUDE_COLORS } from "@/lib/theme"
 import type { ModelUsage } from "@/lib/types"
 
 interface TokenUsageChartProps {
@@ -50,11 +51,6 @@ export function TokenUsageChart({
       { input: 0, output: 0, cacheRead: 0, cacheCreation: 0 }
     )
 
-    const totalTokens =
-      totalUsage.input +
-      totalUsage.output +
-      totalUsage.cacheRead +
-      totalUsage.cacheCreation
     const totalMessages = dailyActivity.reduce(
       (sum, d) => sum + d.messageCount,
       0
@@ -105,15 +101,15 @@ export function TokenUsageChart({
       height="h-[350px]"
       isEmpty={chartData.length === 0}
       actions={
-        <div className="flex items-center gap-0.5 bg-zinc-800 rounded-md p-0.5">
+        <div className="flex items-center gap-0.5 bg-[#2D2822] rounded-md p-0.5">
           {ranges.map((r) => (
             <button
               key={r.value}
               onClick={() => setRange(r.value)}
               className={`px-2.5 py-1 text-xs rounded font-medium transition-colors ${
                 range === r.value
-                  ? "bg-zinc-700 text-zinc-100"
-                  : "text-zinc-400 hover:text-zinc-200"
+                  ? "bg-[#D4714E] text-[#F5F0EB]"
+                  : "text-[#B8AFA5] hover:text-[#F5F0EB]"
               }`}
             >
               {r.label}
@@ -145,40 +141,40 @@ export function TokenUsageChart({
               <stop offset="95%" stopColor={TOKEN_COLORS.cacheCreation} stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID_COLOR} vertical={false} />
           <XAxis
             dataKey="date"
             tickFormatter={formatDate}
-            stroke="#52525b"
-            tick={{ fontSize: 11, fill: "#71717a" }}
+            stroke={CLAUDE_COLORS.borderDefault}
+            tick={{ fontSize: 11, fill: CHART_AXIS_COLOR }}
             axisLine={false}
             tickLine={false}
             interval="preserveStartEnd"
           />
           <YAxis
             tickFormatter={formatTokens}
-            stroke="#52525b"
-            tick={{ fontSize: 11, fill: "#71717a" }}
+            stroke={CLAUDE_COLORS.borderDefault}
+            tick={{ fontSize: 11, fill: CHART_AXIS_COLOR }}
             axisLine={false}
             tickLine={false}
             width={55}
           />
           <RechartsTooltip
             contentStyle={{
-              backgroundColor: "#18181b",
-              border: "1px solid #3f3f46",
-              borderRadius: "8px",
+              backgroundColor: TOOLTIP_STYLE.backgroundColor,
+              border: `1px solid ${TOOLTIP_STYLE.borderColor}`,
+              borderRadius: TOOLTIP_STYLE.borderRadius,
               fontSize: "12px",
             }}
-            labelStyle={{ color: "#a1a1aa" }}
-            itemStyle={{ color: "#e4e4e7" }}
+            labelStyle={{ color: CLAUDE_COLORS.textSecondary }}
+            itemStyle={{ color: CLAUDE_COLORS.textPrimary }}
             labelFormatter={(label) => formatDate(String(label))}
             formatter={(value) => [formatTokens(Number(value)), undefined]}
           />
           <Legend
             iconType="circle"
             iconSize={8}
-            wrapperStyle={{ fontSize: "11px", color: "#a1a1aa" }}
+            wrapperStyle={{ fontSize: "11px", color: CLAUDE_COLORS.textSecondary }}
           />
           <Area
             type="monotone"

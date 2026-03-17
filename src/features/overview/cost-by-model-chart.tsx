@@ -15,7 +15,11 @@ import { ChartContainer } from "@/components/charts/chart-container"
 import {
   getModelColor,
   getModelDisplayName,
+  CHART_GRID_COLOR,
+  CHART_AXIS_COLOR,
+  TOOLTIP_STYLE,
 } from "@/components/charts/recharts-theme"
+import { CLAUDE_COLORS } from "@/lib/theme"
 import { getPricingForModel } from "@/lib/costs"
 import type { DailyModelTokens } from "@/lib/types"
 
@@ -76,33 +80,33 @@ export function CostByModelChart({ dailyModelTokens }: CostByModelChartProps) {
           data={chartData}
           margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID_COLOR} vertical={false} />
           <XAxis
             dataKey="date"
             tickFormatter={formatDate}
-            stroke="#52525b"
-            tick={{ fontSize: 11, fill: "#71717a" }}
+            stroke={CLAUDE_COLORS.borderDefault}
+            tick={{ fontSize: 11, fill: CHART_AXIS_COLOR }}
             axisLine={false}
             tickLine={false}
             interval="preserveStartEnd"
           />
           <YAxis
             tickFormatter={formatCost}
-            stroke="#52525b"
-            tick={{ fontSize: 11, fill: "#71717a" }}
+            stroke={CLAUDE_COLORS.borderDefault}
+            tick={{ fontSize: 11, fill: CHART_AXIS_COLOR }}
             axisLine={false}
             tickLine={false}
             width={55}
           />
           <RechartsTooltip
             contentStyle={{
-              backgroundColor: "#18181b",
-              border: "1px solid #3f3f46",
-              borderRadius: "8px",
+              backgroundColor: TOOLTIP_STYLE.backgroundColor,
+              border: `1px solid ${TOOLTIP_STYLE.borderColor}`,
+              borderRadius: TOOLTIP_STYLE.borderRadius,
               fontSize: "12px",
             }}
-            labelStyle={{ color: "#a1a1aa" }}
-            itemStyle={{ color: "#e4e4e7" }}
+            labelStyle={{ color: CLAUDE_COLORS.textSecondary }}
+            itemStyle={{ color: CLAUDE_COLORS.textPrimary }}
             labelFormatter={(label) => formatDate(String(label))}
             formatter={(value, name) => [
               formatCost(Number(value)),
@@ -113,7 +117,7 @@ export function CostByModelChart({ dailyModelTokens }: CostByModelChartProps) {
             iconType="rect"
             iconSize={10}
             formatter={(value: string) => getModelDisplayName(value)}
-            wrapperStyle={{ fontSize: "11px", color: "#a1a1aa" }}
+            wrapperStyle={{ fontSize: "11px", color: CLAUDE_COLORS.textSecondary }}
           />
           {modelKeys.map((model) => (
             <Bar

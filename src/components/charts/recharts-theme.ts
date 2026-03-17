@@ -1,35 +1,47 @@
+import { CLAUDE_COLORS } from "@/lib/theme"
+
 export const CHART_COLORS = {
-  primary: "#3b82f6",
-  secondary: "#8b5cf6",
-  tertiary: "#06b6d4",
-  quaternary: "#f59e0b",
-  success: "#10b981",
-  danger: "#ef4444",
-  muted: "#6b7280",
+  primary: CLAUDE_COLORS.primary,
+  secondary: CLAUDE_COLORS.chart2,
+  tertiary: CLAUDE_COLORS.chart3,
+  quaternary: CLAUDE_COLORS.chart4,
+  success: CLAUDE_COLORS.success,
+  danger: CLAUDE_COLORS.error,
+  muted: CLAUDE_COLORS.textMuted,
 } as const
 
 export const MODEL_COLORS: Record<string, string> = {
-  "claude-opus-4-6": "#8b5cf6",
-  "claude-opus-4-5-20251101": "#7c3aed",
-  "claude-sonnet-4-5-20250929": "#3b82f6",
-  "claude-sonnet-4-6": "#2563eb",
-  "claude-haiku-4-5-20251001": "#06b6d4",
+  "claude-opus-4-6": CLAUDE_COLORS.chart7,
+  "claude-opus-4-5-20251101": CLAUDE_COLORS.chart4,
+  "claude-sonnet-4-5-20250929": CLAUDE_COLORS.primary,
+  "claude-sonnet-4-6": CLAUDE_COLORS.primaryLight,
+  "claude-haiku-4-5-20251001": CLAUDE_COLORS.chart2,
 }
 
 export const TOKEN_COLORS = {
-  input: "#3b82f6",
-  output: "#10b981",
-  cacheRead: "#8b5cf6",
-  cacheCreation: "#f59e0b",
+  input: CLAUDE_COLORS.chart2,
+  output: CLAUDE_COLORS.primary,
+  cacheRead: CLAUDE_COLORS.chart3,
+  cacheCreation: CLAUDE_COLORS.chart5,
 } as const
 
 export const HEATMAP_COLORS = [
-  "bg-zinc-800",
-  "bg-emerald-900/40",
-  "bg-emerald-700/50",
-  "bg-emerald-500/60",
-  "bg-emerald-400/80",
+  "bg-[#2D2822]",
+  "bg-[#3D2E22]",
+  "bg-[#5A3928]",
+  "bg-[#8B4D30]",
+  "bg-[#D4714E]",
 ] as const
+
+export const CHART_GRID_COLOR = CLAUDE_COLORS.borderSubtle
+export const CHART_AXIS_COLOR = CLAUDE_COLORS.textMuted
+
+export const TOOLTIP_STYLE = {
+  backgroundColor: CLAUDE_COLORS.bgSurface,
+  borderColor: CLAUDE_COLORS.borderDefault,
+  borderRadius: "8px",
+  color: CLAUDE_COLORS.textPrimary,
+} as const
 
 export function getModelColor(modelName: string): string {
   for (const [key, color] of Object.entries(MODEL_COLORS)) {
@@ -37,9 +49,9 @@ export function getModelColor(modelName: string): string {
       return color
     }
   }
-  if (modelName.includes("opus")) return "#8b5cf6"
-  if (modelName.includes("haiku")) return "#06b6d4"
-  return "#3b82f6"
+  if (modelName.includes("opus")) return CLAUDE_COLORS.chart7
+  if (modelName.includes("haiku")) return CLAUDE_COLORS.chart2
+  return CLAUDE_COLORS.primary
 }
 
 export function getModelDisplayName(modelName: string): string {

@@ -97,8 +97,8 @@ export default function ProductivityPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-xl font-semibold text-zinc-100">Productivity</h1>
-          <p className="text-sm text-zinc-500 mt-1">
+          <h1 className="text-xl font-semibold text-[#F5F0EB]">Productivity</h1>
+          <p className="text-sm text-[#7A7267] mt-1">
             Workflow metrics and coding patterns
           </p>
         </div>
@@ -121,8 +121,8 @@ export default function ProductivityPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-semibold text-zinc-100">Productivity</h1>
-        <p className="text-sm text-zinc-500 mt-1">
+        <h1 className="text-xl font-semibold text-[#F5F0EB]">Productivity</h1>
+        <p className="text-sm text-[#7A7267] mt-1">
           Workflow metrics and coding patterns
         </p>
       </div>

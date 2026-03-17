@@ -100,11 +100,14 @@ export async function parseSessionDetail(
 ): Promise<SessionDetail> {
   const messages: ParsedMessage[] = []
   const toolCallCounts: Record<string, number> = {}
+  const modelsUsedSet = new Set<string>()
   let totalInput = 0
   let totalOutput = 0
   let totalCacheRead = 0
   let totalCacheCreation = 0
   let estimatedCost = 0
+  let webSearchCount = 0
+  let progressMessageCount = 0
   let sessionId = ""
   let gitBranch = ""
   let created = ""
@@ -127,6 +130,11 @@ export async function parseSessionDetail(
       const timestamp = msg.timestamp ?? ""
       if (!created || timestamp < created) created = timestamp
       if (!modified || timestamp > modified) modified = timestamp
+
+      if (msg.type === "progress") {
+        progressMessageCount++
+        continue
+      }
 
       if (msg.type === "user") {
         const userMsg = msg as UserMessage
@@ -163,6 +171,10 @@ export async function parseSessionDetail(
             return { id: b.id ?? "", name, input: b.input }
           })
 
+        if (model) {
+          modelsUsedSet.add(model)
+        }
+
         let tokens: TokenUsage | undefined
         if (usage) {
           tokens = {
@@ -170,11 +182,20 @@ export async function parseSessionDetail(
             output_tokens: usage.output_tokens ?? 0,
             cache_creation_input_tokens: usage.cache_creation_input_tokens ?? 0,
             cache_read_input_tokens: usage.cache_read_input_tokens ?? 0,
+            service_tier: usage.service_tier,
+            inference_geo: usage.inference_geo,
           }
           totalInput += tokens.input_tokens
           totalOutput += tokens.output_tokens
           totalCacheRead += tokens.cache_read_input_tokens
           totalCacheCreation += tokens.cache_creation_input_tokens
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const rawUsage = usage as Record<string, any>
+          const msgWebSearchRequests = typeof rawUsage.webSearchRequests === "number"
+            ? rawUsage.webSearchRequests
+            : 0
+          webSearchCount += msgWebSearchRequests
 
           estimatedCost += calculateModelCost(
             {
@@ -182,7 +203,7 @@ export async function parseSessionDetail(
               outputTokens: tokens.output_tokens,
               cacheReadInputTokens: tokens.cache_read_input_tokens,
               cacheCreationInputTokens: tokens.cache_creation_input_tokens,
-              webSearchRequests: 0,
+              webSearchRequests: msgWebSearchRequests,
               costUSD: 0,
               contextWindow: 0,
               maxOutputTokens: 0,
@@ -229,5 +250,7 @@ export async function parseSessionDetail(
     totalTokens,
     estimatedCost,
     toolCalls,
+    modelsUsed: [...modelsUsedSet],
+    webSearchCount,
   }
 }

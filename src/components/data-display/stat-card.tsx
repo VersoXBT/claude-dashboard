@@ -22,21 +22,22 @@ export function StatCard({
 }: StatCardProps) {
   const deltaColor =
     deltaType === "positive"
-      ? "text-emerald-400"
+      ? "text-[#6EAE7E]"
       : deltaType === "negative"
-        ? "text-red-400"
-        : "text-zinc-500"
+        ? "text-[#C45B5B]"
+        : "text-muted-foreground"
 
   return (
-    <Card className="bg-zinc-900/50 border-zinc-800">
-      <CardContent className="p-5">
+    <Card className="relative overflow-hidden border-border bg-card hover:bg-[#2D2822] transition-all duration-200 group">
+      <div className="absolute inset-y-0 left-0 w-[3px] bg-gradient-to-b from-[#D4714E] to-[#D4A04E] opacity-60 group-hover:opacity-100 transition-opacity" />
+      <CardContent className="p-5 pl-6">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">
+          <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
             {title}
           </span>
-          {Icon && <Icon className="h-4 w-4 text-zinc-500" />}
+          {Icon && <Icon className="h-4 w-4 text-[#D4714E]" />}
         </div>
-        <div className="text-2xl font-bold text-zinc-100">{value}</div>
+        <div className="text-2xl font-bold text-foreground">{value}</div>
         {(subtitle ?? delta) && (
           <div className="flex items-center gap-2 mt-1.5">
             {delta && (
@@ -45,7 +46,7 @@ export function StatCard({
               </span>
             )}
             {subtitle && (
-              <span className="text-xs text-zinc-500">{subtitle}</span>
+              <span className="text-xs text-muted-foreground">{subtitle}</span>
             )}
           </div>
         )}

@@ -61,10 +61,10 @@ function CustomTooltip({
   if (!active || !payload?.length) return null
 
   return (
-    <div className="bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-xs shadow-lg">
-      <div className="font-medium text-zinc-200 mb-1">{label}</div>
+    <div className="bg-[#2D2822] border border-[#3D3830] rounded-md px-3 py-2 text-xs shadow-lg">
+      <div className="font-medium text-[#F5F0EB] mb-1">{label}</div>
       {payload.map((entry) => (
-        <div key={entry.name} className="text-zinc-400">
+        <div key={entry.name} className="text-[#B8AFA5]">
           {entry.name}: {entry.value}
           {entry.name === "Avg Duration" ? " min" : ""}
         </div>
@@ -88,42 +88,42 @@ export function SessionDurationChart({
     >
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#302C26" />
           <XAxis
             dataKey="label"
-            tick={{ fill: "#71717a", fontSize: 11 }}
+            tick={{ fill: "#7A7267", fontSize: 11 }}
             tickLine={false}
             axisLine={false}
             interval="preserveStartEnd"
           />
           <YAxis
             yAxisId="left"
-            tick={{ fill: "#71717a", fontSize: 11 }}
+            tick={{ fill: "#7A7267", fontSize: 11 }}
             tickLine={false}
             axisLine={false}
             label={{
               value: "Sessions",
               angle: -90,
               position: "insideLeft",
-              style: { fill: "#71717a", fontSize: 11 },
+              style: { fill: "#7A7267", fontSize: 11 },
             }}
           />
           <YAxis
             yAxisId="right"
             orientation="right"
-            tick={{ fill: "#71717a", fontSize: 11 }}
+            tick={{ fill: "#7A7267", fontSize: 11 }}
             tickLine={false}
             axisLine={false}
             label={{
               value: "Avg Duration (min)",
               angle: 90,
               position: "insideRight",
-              style: { fill: "#71717a", fontSize: 11 },
+              style: { fill: "#7A7267", fontSize: 11 },
             }}
           />
           <Tooltip content={<CustomTooltip />} />
           <Legend
-            wrapperStyle={{ fontSize: 12, color: "#a1a1aa" }}
+            wrapperStyle={{ fontSize: 12, color: "#B8AFA5" }}
           />
           <Bar
             yAxisId="left"

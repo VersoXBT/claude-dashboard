@@ -47,6 +47,17 @@ function calculateStreak(
   return streak
 }
 
+function getFirstSessionDate(
+  dailyActivity: readonly { date: string; messageCount: number }[]
+): string | null {
+  const active = [...dailyActivity]
+    .filter((d) => d.messageCount > 0)
+    .sort((a, b) => a.date.localeCompare(b.date))
+  if (active.length === 0) return null
+  const d = new Date(active[0].date + "T00:00:00")
+  return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
+}
+
 export default function OverviewPage() {
   const { data: stats, isLoading: statsLoading } = useStats()
   const { data: activeData } = useActiveSessions()
@@ -57,8 +68,8 @@ export default function OverviewPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-xl font-semibold text-zinc-100">Overview</h1>
-          <p className="text-sm text-zinc-500 mt-1">
+          <h1 className="text-xl font-semibold text-[#F5F0EB]">Overview</h1>
+          <p className="text-sm text-[#7A7267] mt-1">
             Your Claude Code usage at a glance
           </p>
         </div>
@@ -82,23 +93,27 @@ export default function OverviewPage() {
         0
       )
     : 0
+  const firstDate = stats ? getFirstSessionDate(stats.dailyActivity) : null
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-zinc-100">Overview</h1>
-          <p className="text-sm text-zinc-500 mt-1">
+          <h1 className="text-xl font-semibold text-[#F5F0EB]">Overview</h1>
+          <p className="text-sm text-[#7A7267] mt-1">
             Your Claude Code usage at a glance
+            {firstDate && (
+              <span className="text-[#B8AFA5]"> &middot; coding with Claude since {firstDate}</span>
+            )}
           </p>
         </div>
         {activeSessions > 0 && (
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#D4714E]/10 border border-[#D4714E]/20">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E8956A] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D4714E]" />
             </span>
-            <span className="text-xs font-medium text-emerald-400">
+            <span className="text-xs font-medium text-[#E8956A]">
               {activeSessions} active session{activeSessions !== 1 ? "s" : ""}
             </span>
           </div>

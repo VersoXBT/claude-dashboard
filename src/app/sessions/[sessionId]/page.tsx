@@ -80,12 +80,12 @@ export default function SessionDetailPage() {
           variant="ghost"
           size="sm"
           onClick={() => router.push("/sessions")}
-          className="text-zinc-400"
+          className="text-[#B8AFA5] hover:text-[#D4714E] hover:bg-[#2D2822]"
         >
           <ArrowLeft className="h-4 w-4 mr-1" />
           Back to sessions
         </Button>
-        <div className="text-center py-16 text-zinc-500">
+        <div className="text-center py-16 text-[#7A7267]">
           <p className="text-lg font-medium">Session not found</p>
         </div>
       </div>
@@ -130,27 +130,29 @@ function SessionHeader({
         variant="ghost"
         size="sm"
         onClick={onBack}
-        className="text-zinc-400"
+        className="text-[#B8AFA5] hover:text-[#D4714E] hover:bg-[#2D2822]"
       >
         <ArrowLeft className="h-4 w-4 mr-1" />
         Back to sessions
       </Button>
       <div>
-        <h1 className="text-xl font-semibold text-zinc-100">
+        <h1 className="text-xl font-semibold text-[#F5F0EB]">
           {summary}
           {summary.length >= 120 ? "..." : ""}
         </h1>
         <div className="flex flex-wrap items-center gap-2 mt-2">
-          <Badge variant="secondary">{session.projectName}</Badge>
+          <Badge className="bg-[#D4A04E]/15 text-[#D4A04E] border-[#D4A04E]/30">
+            {session.projectName}
+          </Badge>
           {session.gitBranch && (
-            <Badge variant="outline" className="font-mono text-xs">
+            <Badge variant="outline" className="font-mono text-xs border-[#3D3830] text-[#B8AFA5]">
               {session.gitBranch}
             </Badge>
           )}
-          <span className="text-xs text-zinc-500">
+          <span className="text-xs text-[#7A7267]">
             {format(new Date(session.created), "MMM d, yyyy 'at' h:mm a")}
           </span>
-          <span className="text-xs text-zinc-500">
+          <span className="text-xs text-[#7A7267]">
             {formatDistanceToNow(new Date(session.created), {
               addSuffix: true,
             })}
@@ -172,57 +174,57 @@ function KPICards({
 }) {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-      <Card className="bg-zinc-900/50 border-zinc-800">
+      <Card className="bg-[#231F1B]/50 border-[#3D3830]">
         <CardContent className="p-4">
           <div className="flex items-center gap-2 mb-2">
-            <MessageSquare className="h-4 w-4 text-blue-400" />
-            <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">
+            <MessageSquare className="h-4 w-4 text-[#D4714E]" />
+            <span className="text-xs font-medium text-[#B8AFA5] uppercase tracking-wider">
               Messages
             </span>
           </div>
-          <div className="text-2xl font-bold text-zinc-100">
+          <div className="text-2xl font-bold text-[#F5F0EB]">
             {session.messages.length}
           </div>
         </CardContent>
       </Card>
 
-      <Card className="bg-zinc-900/50 border-zinc-800">
+      <Card className="bg-[#231F1B]/50 border-[#3D3830]">
         <CardContent className="p-4">
           <div className="flex items-center gap-2 mb-2">
-            <Zap className="h-4 w-4 text-amber-400" />
-            <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">
+            <Zap className="h-4 w-4 text-[#D4A04E]" />
+            <span className="text-xs font-medium text-[#B8AFA5] uppercase tracking-wider">
               Total Tokens
             </span>
           </div>
-          <div className="text-2xl font-bold text-zinc-100">
+          <div className="text-2xl font-bold text-[#F5F0EB]">
             {formatNumber(session.totalTokens.totalTokens)}
           </div>
         </CardContent>
       </Card>
 
-      <Card className="bg-zinc-900/50 border-zinc-800">
+      <Card className="bg-[#231F1B]/50 border-[#3D3830]">
         <CardContent className="p-4">
           <div className="flex items-center gap-2 mb-2">
-            <DollarSign className="h-4 w-4 text-emerald-400" />
-            <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">
+            <DollarSign className="h-4 w-4 text-[#6EAE7E]" />
+            <span className="text-xs font-medium text-[#B8AFA5] uppercase tracking-wider">
               Est. Cost
             </span>
           </div>
-          <div className="text-2xl font-bold text-zinc-100">
+          <div className="text-2xl font-bold text-[#F5F0EB]">
             ${cost.toFixed(2)}
           </div>
         </CardContent>
       </Card>
 
-      <Card className="bg-zinc-900/50 border-zinc-800">
+      <Card className="bg-[#231F1B]/50 border-[#3D3830]">
         <CardContent className="p-4">
           <div className="flex items-center gap-2 mb-2">
-            <Clock className="h-4 w-4 text-violet-400" />
-            <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">
+            <Clock className="h-4 w-4 text-[#5BA3A8]" />
+            <span className="text-xs font-medium text-[#B8AFA5] uppercase tracking-wider">
               Duration
             </span>
           </div>
-          <div className="text-2xl font-bold text-zinc-100">{duration}</div>
+          <div className="text-2xl font-bold text-[#F5F0EB]">{duration}</div>
         </CardContent>
       </Card>
     </div>
@@ -250,9 +252,9 @@ function TokenWaterfall({
   if (chartData.length === 0) return null
 
   return (
-    <Card className="bg-zinc-900/50 border-zinc-800">
+    <Card className="bg-[#231F1B]/50 border-[#3D3830]">
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-zinc-300">
+        <CardTitle className="text-sm font-medium text-[#F5F0EB]">
           Token Waterfall
         </CardTitle>
       </CardHeader>
@@ -262,32 +264,32 @@ function TokenWaterfall({
             data={chartData}
             margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#3D3830" />
             <XAxis
               dataKey="index"
-              tick={{ fill: "#71717a", fontSize: 12 }}
-              stroke="#3f3f46"
+              tick={{ fill: "#7A7267", fontSize: 12 }}
+              stroke="#3D3830"
               label={{
                 value: "Message #",
                 position: "insideBottom",
                 offset: -2,
-                fill: "#71717a",
+                fill: "#7A7267",
                 fontSize: 12,
               }}
             />
             <YAxis
-              tick={{ fill: "#71717a", fontSize: 12 }}
-              stroke="#3f3f46"
+              tick={{ fill: "#7A7267", fontSize: 12 }}
+              stroke="#3D3830"
               tickFormatter={(v: number) => formatNumber(v)}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#18181b",
-                border: "1px solid #3f3f46",
+                backgroundColor: "#2D2822",
+                border: "1px solid #3D3830",
                 borderRadius: "8px",
                 fontSize: "12px",
               }}
-              labelStyle={{ color: "#a1a1aa" }}
+              labelStyle={{ color: "#B8AFA5" }}
               formatter={(value) => [
                 formatNumber(Number(value)),
                 "",
@@ -295,7 +297,7 @@ function TokenWaterfall({
               labelFormatter={(label) => `Message #${label}`}
             />
             <Legend
-              wrapperStyle={{ fontSize: "12px", color: "#a1a1aa" }}
+              wrapperStyle={{ fontSize: "12px", color: "#B8AFA5" }}
               formatter={(value: string) =>
                 value === "input"
                   ? "Input"
@@ -307,19 +309,19 @@ function TokenWaterfall({
             <Bar
               dataKey="input"
               stackId="tokens"
-              fill="#3b82f6"
+              fill="#5BA3A8"
               radius={[0, 0, 0, 0]}
             />
             <Bar
               dataKey="output"
               stackId="tokens"
-              fill="#22c55e"
+              fill="#D4714E"
               radius={[0, 0, 0, 0]}
             />
             <Bar
               dataKey="cache"
               stackId="tokens"
-              fill="#a855f7"
+              fill="#D4A04E"
               radius={[2, 2, 0, 0]}
             />
           </BarChart>
@@ -335,9 +337,9 @@ function ConversationTimeline({
   readonly messages: readonly ParsedMessage[]
 }) {
   return (
-    <Card className="bg-zinc-900/50 border-zinc-800">
+    <Card className="bg-[#231F1B]/50 border-[#3D3830]">
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-zinc-300">
+        <CardTitle className="text-sm font-medium text-[#F5F0EB]">
           Conversation Timeline
         </CardTitle>
       </CardHeader>
@@ -363,14 +365,14 @@ function MessageBubble({
 
   if (message.role === "user") {
     return (
-      <div className="rounded-lg bg-blue-500/10 border border-blue-500/20 p-3">
+      <div className="rounded-lg bg-[#231F1B] border-l-2 border-[#D4714E] border-r border-t border-b border-r-[#3D3830] border-t-[#3D3830] border-b-[#3D3830] p-3">
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-xs font-medium text-blue-400">User</span>
-          <span className="text-xs text-zinc-600">
+          <span className="text-xs font-medium text-[#D4714E]">User</span>
+          <span className="text-xs text-[#564F47]">
             {format(new Date(message.timestamp), "h:mm:ss a")}
           </span>
         </div>
-        <p className="text-sm text-zinc-300 line-clamp-4 whitespace-pre-wrap">
+        <p className="text-sm text-[#F5F0EB] line-clamp-4 whitespace-pre-wrap">
           {message.content}
         </p>
       </div>
@@ -385,41 +387,41 @@ function MessageBubble({
 
     return (
       <div className="space-y-1">
-        <div className="rounded-lg bg-violet-500/10 border border-violet-500/20 p-3">
+        <div className="rounded-lg bg-[#231F1B] border-l-2 border-[#5BA3A8] border-r border-t border-b border-r-[#3D3830] border-t-[#3D3830] border-b-[#3D3830] p-3">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-medium text-violet-400">
+            <span className="text-xs font-medium text-[#5BA3A8]">
               Assistant
             </span>
-            <span className="text-xs text-zinc-600">
+            <span className="text-xs text-[#564F47]">
               {format(new Date(message.timestamp), "h:mm:ss a")}
             </span>
             {tokenCount > 0 && (
-              <Badge variant="secondary" className="text-[10px] h-4 px-1.5">
+              <Badge className="text-[10px] h-4 px-1.5 bg-[#D4714E]/15 text-[#D4714E] border-[#D4714E]/30">
                 {formatNumber(tokenCount)} tokens
               </Badge>
             )}
             {message.model && (
-              <span className="text-[10px] text-zinc-600">{message.model}</span>
+              <span className="text-[10px] text-[#564F47]">{message.model}</span>
             )}
           </div>
-          <p className="text-sm text-zinc-300 line-clamp-4 whitespace-pre-wrap">
+          <p className="text-sm text-[#F5F0EB] line-clamp-4 whitespace-pre-wrap">
             {message.content}
           </p>
         </div>
 
         {message.toolCalls && message.toolCalls.length > 0 && (
-          <div className="rounded-lg bg-zinc-800 border border-zinc-700 p-2">
+          <div className="rounded-lg bg-[#2D2822] border border-[#3D3830] p-2">
             <button
               onClick={() => setToolsExpanded((prev) => !prev)}
               className="flex items-center gap-1.5 w-full text-left"
             >
               {toolsExpanded ? (
-                <ChevronDown className="h-3 w-3 text-zinc-500" />
+                <ChevronDown className="h-3 w-3 text-[#7A7267]" />
               ) : (
-                <ChevronRight className="h-3 w-3 text-zinc-500" />
+                <ChevronRight className="h-3 w-3 text-[#7A7267]" />
               )}
-              <Wrench className="h-3 w-3 text-zinc-500" />
-              <span className="text-xs text-zinc-400">
+              <Wrench className="h-3 w-3 text-[#7A7267]" />
+              <span className="text-xs text-[#B8AFA5]">
                 {message.toolCalls.length} tool call
                 {message.toolCalls.length !== 1 ? "s" : ""}
               </span>
@@ -428,7 +430,7 @@ function MessageBubble({
                   <Badge
                     key={tc.id}
                     variant="outline"
-                    className="text-[10px] h-4 px-1.5 font-mono"
+                    className="text-[10px] h-4 px-1.5 font-mono border-[#3D3830] text-[#B8AFA5]"
                   >
                     {tc.name}
                   </Badge>
@@ -438,10 +440,10 @@ function MessageBubble({
             {toolsExpanded && (
               <div className="mt-2 space-y-1 pl-5">
                 {message.toolCalls.map((tc) => (
-                  <div key={tc.id} className="text-xs text-zinc-500 font-mono">
+                  <div key={tc.id} className="text-xs text-[#7A7267] font-mono">
                     {tc.name}
                     {tc.input ? (
-                      <span className="text-zinc-600 ml-1">
+                      <span className="text-[#564F47] ml-1">
                         ({JSON.stringify(tc.input).slice(0, 80)}
                         {JSON.stringify(tc.input).length > 80 ? "..." : ""})
                       </span>
@@ -457,8 +459,8 @@ function MessageBubble({
   }
 
   return (
-    <div className="rounded-lg bg-zinc-800/50 border border-zinc-700/50 p-2">
-      <span className="text-xs text-zinc-500">
+    <div className="rounded-lg bg-[#2D2822]/50 border border-[#3D3830]/50 p-2">
+      <span className="text-xs text-[#7A7267]">
         {message.role} - {format(new Date(message.timestamp), "h:mm:ss a")}
       </span>
     </div>
@@ -478,9 +480,9 @@ function ToolUsageSummary({
   if (sortedTools.length === 0) return null
 
   return (
-    <Card className="bg-zinc-900/50 border-zinc-800">
+    <Card className="bg-[#231F1B]/50 border-[#3D3830]">
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-zinc-300">
+        <CardTitle className="text-sm font-medium text-[#F5F0EB]">
           Tool Usage
         </CardTitle>
       </CardHeader>
@@ -493,31 +495,31 @@ function ToolUsageSummary({
           >
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="#27272a"
+              stroke="#3D3830"
               horizontal={false}
             />
             <XAxis
               type="number"
-              tick={{ fill: "#71717a", fontSize: 12 }}
-              stroke="#3f3f46"
+              tick={{ fill: "#7A7267", fontSize: 12 }}
+              stroke="#3D3830"
             />
             <YAxis
               type="category"
               dataKey="name"
-              tick={{ fill: "#a1a1aa", fontSize: 11 }}
-              stroke="#3f3f46"
+              tick={{ fill: "#B8AFA5", fontSize: 11 }}
+              stroke="#3D3830"
               width={100}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#18181b",
-                border: "1px solid #3f3f46",
+                backgroundColor: "#2D2822",
+                border: "1px solid #3D3830",
                 borderRadius: "8px",
                 fontSize: "12px",
               }}
               formatter={(value) => [Number(value), "Calls"]}
             />
-            <Bar dataKey="count" fill="#6366f1" radius={[0, 4, 4, 0]} />
+            <Bar dataKey="count" fill="#D4714E" radius={[0, 4, 4, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </CardContent>
@@ -529,22 +531,22 @@ function SessionDetailSkeleton() {
   return (
     <div className="space-y-6">
       <div className="space-y-3">
-        <Skeleton className="h-8 w-32" />
-        <Skeleton className="h-6 w-96" />
+        <Skeleton className="h-8 w-32 bg-[#2D2822]" />
+        <Skeleton className="h-6 w-96 bg-[#2D2822]" />
         <div className="flex gap-2">
-          <Skeleton className="h-5 w-20" />
-          <Skeleton className="h-5 w-32" />
+          <Skeleton className="h-5 w-20 bg-[#2D2822]" />
+          <Skeleton className="h-5 w-32 bg-[#2D2822]" />
         </div>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <Skeleton key={i} className="h-[100px] rounded-lg" />
+          <Skeleton key={i} className="h-[100px] rounded-lg bg-[#2D2822]" />
         ))}
       </div>
-      <Skeleton className="h-[280px] rounded-lg" />
+      <Skeleton className="h-[280px] rounded-lg bg-[#2D2822]" />
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        <Skeleton className="xl:col-span-2 h-[500px] rounded-lg" />
-        <Skeleton className="h-[300px] rounded-lg" />
+        <Skeleton className="xl:col-span-2 h-[500px] rounded-lg bg-[#2D2822]" />
+        <Skeleton className="h-[300px] rounded-lg bg-[#2D2822]" />
       </div>
     </div>
   )

@@ -124,28 +124,28 @@ export default function SessionsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-semibold text-zinc-100">Sessions</h1>
-        <p className="text-sm text-zinc-500 mt-1">
+        <h1 className="text-xl font-semibold text-[#F5F0EB]">Sessions</h1>
+        <p className="text-sm text-[#7A7267] mt-1">
           Browse and search all Claude Code sessions
         </p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
+          <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#7A7267]" />
           <Input
             placeholder="Search sessions..."
             value={search}
             onChange={handleSearchChange}
-            className="pl-9 bg-zinc-900/50 border-zinc-800"
+            className="pl-9 bg-[#231F1B] border-[#3D3830] text-[#F5F0EB] placeholder:text-[#7A7267] focus-visible:ring-[#D4714E]/50 focus-visible:border-[#D4714E]"
           />
         </div>
         <div className="flex gap-2">
           <Select value={project} onValueChange={handleProjectChange}>
-            <SelectTrigger className="bg-zinc-900/50 border-zinc-800 min-w-[140px]">
+            <SelectTrigger className="bg-[#231F1B] border-[#3D3830] text-[#B8AFA5] min-w-[140px]">
               <SelectValue placeholder="All projects" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-[#2D2822] border-[#3D3830]">
               <SelectItem value="">All projects</SelectItem>
               {projectNames.map((name) => (
                 <SelectItem key={name} value={name}>
@@ -156,10 +156,10 @@ export default function SessionsPage() {
           </Select>
 
           <Select value={sort} onValueChange={handleSortChange}>
-            <SelectTrigger className="bg-zinc-900/50 border-zinc-800 min-w-[120px]">
+            <SelectTrigger className="bg-[#231F1B] border-[#3D3830] text-[#B8AFA5] min-w-[120px]">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-[#2D2822] border-[#3D3830]">
               <SelectItem value="modified">Modified</SelectItem>
               <SelectItem value="created">Created</SelectItem>
             </SelectContent>
@@ -169,7 +169,7 @@ export default function SessionsPage() {
             variant="outline"
             size="icon"
             onClick={toggleOrder}
-            className="bg-zinc-900/50 border-zinc-800"
+            className="bg-[#231F1B] border-[#3D3830] text-[#B8AFA5] hover:bg-[#2D2822] hover:text-[#F5F0EB]"
           >
             {order === "desc" ? (
               <ArrowDown className="h-4 w-4" />
@@ -183,7 +183,7 @@ export default function SessionsPage() {
       {isLoading ? (
         <SessionsTableSkeleton />
       ) : !data?.sessions.length ? (
-        <div className="text-center py-16 text-zinc-500">
+        <div className="text-center py-16 text-[#7A7267]">
           <p className="text-lg font-medium">No sessions found</p>
           <p className="text-sm mt-1">
             {debouncedSearch
@@ -193,25 +193,26 @@ export default function SessionsPage() {
         </div>
       ) : (
         <>
-          <div className="rounded-lg border border-zinc-800 overflow-hidden">
+          <div className="rounded-lg border border-[#3D3830] overflow-hidden">
             <Table>
               <TableHeader>
-                <TableRow className="border-zinc-800 hover:bg-transparent">
-                  <TableHead className="w-[40px]">Status</TableHead>
-                  <TableHead>Project</TableHead>
-                  <TableHead className="min-w-[250px]">Summary</TableHead>
-                  <TableHead className="text-right">Messages</TableHead>
-                  <TableHead>Duration</TableHead>
-                  <TableHead>Branch</TableHead>
-                  <TableHead>Started</TableHead>
+                <TableRow className="border-[#302C26] hover:bg-transparent bg-[#2D2822]">
+                  <TableHead className="w-[40px] text-[#B8AFA5]">Status</TableHead>
+                  <TableHead className="text-[#B8AFA5]">Project</TableHead>
+                  <TableHead className="min-w-[250px] text-[#B8AFA5]">Summary</TableHead>
+                  <TableHead className="text-right text-[#B8AFA5]">Messages</TableHead>
+                  <TableHead className="text-[#B8AFA5]">Duration</TableHead>
+                  <TableHead className="text-[#B8AFA5]">Branch</TableHead>
+                  <TableHead className="text-[#B8AFA5]">Started</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {data.sessions.map((session) => (
+                {data.sessions.map((session, index) => (
                   <SessionRow
                     key={session.sessionId}
                     session={session}
                     onClick={handleRowClick}
+                    isEven={index % 2 === 0}
                   />
                 ))}
               </TableBody>
@@ -219,7 +220,7 @@ export default function SessionsPage() {
           </div>
 
           <div className="flex items-center justify-between">
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-[#7A7267]">
               Showing {(data.page - 1) * data.limit + 1}-
               {Math.min(data.page * data.limit, data.total)} of {data.total}{" "}
               sessions
@@ -230,12 +231,12 @@ export default function SessionsPage() {
                 size="sm"
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={data.page <= 1}
-                className="bg-zinc-900/50 border-zinc-800"
+                className="bg-[#231F1B] border-[#3D3830] text-[#B8AFA5] hover:bg-[#2D2822] hover:text-[#F5F0EB] disabled:opacity-40"
               >
                 <ChevronLeft className="h-4 w-4 mr-1" />
                 Previous
               </Button>
-              <span className="text-sm text-zinc-400 px-2">
+              <span className="text-sm text-[#B8AFA5] px-2">
                 {data.page} / {data.totalPages}
               </span>
               <Button
@@ -243,7 +244,7 @@ export default function SessionsPage() {
                 size="sm"
                 onClick={() => setPage((p) => p + 1)}
                 disabled={data.page >= data.totalPages}
-                className="bg-zinc-900/50 border-zinc-800"
+                className="bg-[#231F1B] border-[#3D3830] text-[#B8AFA5] hover:bg-[#2D2822] hover:text-[#F5F0EB] disabled:opacity-40"
               >
                 Next
                 <ChevronRight className="h-4 w-4 ml-1" />
@@ -259,48 +260,52 @@ export default function SessionsPage() {
 function SessionRow({
   session,
   onClick,
+  isEven,
 }: {
   readonly session: SessionListItem
   readonly onClick: (id: string) => void
+  readonly isEven: boolean
 }) {
   return (
     <TableRow
-      className="border-zinc-800 cursor-pointer hover:bg-zinc-800/50"
+      className={`border-[#302C26] cursor-pointer hover:bg-[#2D2822] ${isEven ? "bg-[#231F1B]" : "bg-[#1E1B17]"}`}
       onClick={() => onClick(session.sessionId)}
     >
       <TableCell>
         <span
           className={`inline-block h-2 w-2 rounded-full ${
-            session.isActive ? "bg-emerald-500" : "bg-zinc-600"
+            session.isActive
+              ? "bg-[#D4714E] shadow-[0_0_6px_rgba(212,113,78,0.6)]"
+              : "bg-[#564F47]"
           }`}
         />
       </TableCell>
       <TableCell>
-        <Badge variant="secondary" className="text-xs">
+        <Badge className="text-xs bg-[#D4A04E]/15 text-[#D4A04E] border-[#D4A04E]/30 hover:bg-[#D4A04E]/25">
           {session.projectName}
         </Badge>
       </TableCell>
       <TableCell>
-        <span className="text-zinc-200">
+        <span className="text-[#F5F0EB]">
           {truncate(session.summary || session.firstPrompt || "Untitled", 60)}
         </span>
       </TableCell>
-      <TableCell className="text-right text-zinc-400">
+      <TableCell className="text-right text-[#B8AFA5]">
         {session.messageCount}
       </TableCell>
-      <TableCell className="text-zinc-400">
+      <TableCell className="text-[#B8AFA5]">
         {formatDuration(session.created, session.modified)}
       </TableCell>
       <TableCell>
         {session.gitBranch ? (
-          <Badge variant="outline" className="text-xs font-mono">
+          <Badge variant="outline" className="text-xs font-mono border-[#3D3830] text-[#B8AFA5] bg-transparent">
             {truncate(session.gitBranch, 20)}
           </Badge>
         ) : (
-          <span className="text-zinc-600">--</span>
+          <span className="text-[#564F47]">--</span>
         )}
       </TableCell>
-      <TableCell className="text-zinc-400">
+      <TableCell className="text-[#B8AFA5]">
         {formatDistanceToNow(new Date(session.created), { addSuffix: true })}
       </TableCell>
     </TableRow>
@@ -309,42 +314,42 @@ function SessionRow({
 
 function SessionsTableSkeleton() {
   return (
-    <div className="rounded-lg border border-zinc-800 overflow-hidden">
+    <div className="rounded-lg border border-[#3D3830] overflow-hidden">
       <Table>
         <TableHeader>
-          <TableRow className="border-zinc-800 hover:bg-transparent">
-            <TableHead className="w-[40px]">Status</TableHead>
-            <TableHead>Project</TableHead>
-            <TableHead className="min-w-[250px]">Summary</TableHead>
-            <TableHead className="text-right">Messages</TableHead>
-            <TableHead>Duration</TableHead>
-            <TableHead>Branch</TableHead>
-            <TableHead>Started</TableHead>
+          <TableRow className="border-[#302C26] hover:bg-transparent bg-[#2D2822]">
+            <TableHead className="w-[40px] text-[#B8AFA5]">Status</TableHead>
+            <TableHead className="text-[#B8AFA5]">Project</TableHead>
+            <TableHead className="min-w-[250px] text-[#B8AFA5]">Summary</TableHead>
+            <TableHead className="text-right text-[#B8AFA5]">Messages</TableHead>
+            <TableHead className="text-[#B8AFA5]">Duration</TableHead>
+            <TableHead className="text-[#B8AFA5]">Branch</TableHead>
+            <TableHead className="text-[#B8AFA5]">Started</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {Array.from({ length: 8 }).map((_, i) => (
-            <TableRow key={i} className="border-zinc-800">
+            <TableRow key={i} className={`border-[#302C26] ${i % 2 === 0 ? "bg-[#231F1B]" : "bg-[#1E1B17]"}`}>
               <TableCell>
-                <Skeleton className="h-2 w-2 rounded-full" />
+                <Skeleton className="h-2 w-2 rounded-full bg-[#2D2822]" />
               </TableCell>
               <TableCell>
-                <Skeleton className="h-5 w-20" />
+                <Skeleton className="h-5 w-20 bg-[#2D2822]" />
               </TableCell>
               <TableCell>
-                <Skeleton className="h-4 w-64" />
+                <Skeleton className="h-4 w-64 bg-[#2D2822]" />
               </TableCell>
               <TableCell className="text-right">
-                <Skeleton className="h-4 w-8 ml-auto" />
+                <Skeleton className="h-4 w-8 ml-auto bg-[#2D2822]" />
               </TableCell>
               <TableCell>
-                <Skeleton className="h-4 w-12" />
+                <Skeleton className="h-4 w-12 bg-[#2D2822]" />
               </TableCell>
               <TableCell>
-                <Skeleton className="h-5 w-24" />
+                <Skeleton className="h-5 w-24 bg-[#2D2822]" />
               </TableCell>
               <TableCell>
-                <Skeleton className="h-4 w-20" />
+                <Skeleton className="h-4 w-20 bg-[#2D2822]" />
               </TableCell>
             </TableRow>
           ))}

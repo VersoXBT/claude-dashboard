@@ -10,7 +10,8 @@ import {
   ResponsiveContainer,
 } from "recharts"
 import { ChartContainer } from "@/components/charts/chart-container"
-import { CHART_COLORS } from "@/components/charts/recharts-theme"
+import { CHART_COLORS, CHART_GRID_COLOR, CHART_AXIS_COLOR, TOOLTIP_STYLE } from "@/components/charts/recharts-theme"
+import { CLAUDE_COLORS } from "@/lib/theme"
 import type { ProjectResponse } from "@/lib/types"
 
 interface ProjectCostChartProps {
@@ -42,27 +43,27 @@ export function ProjectCostChart({ projects, isLoading }: ProjectCostChartProps)
           layout="vertical"
           margin={{ top: 5, right: 20, left: 0, bottom: 0 }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#27272a" horizontal={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID_COLOR} horizontal={false} />
           <XAxis
             type="number"
             tickFormatter={(v: number) => `$${v.toFixed(0)}`}
-            tick={{ fontSize: 11, fill: "#71717a" }}
+            tick={{ fontSize: 11, fill: CHART_AXIS_COLOR }}
             axisLine={false}
             tickLine={false}
           />
           <YAxis
             dataKey="name"
             type="category"
-            tick={{ fontSize: 11, fill: "#a1a1aa" }}
+            tick={{ fontSize: 11, fill: CLAUDE_COLORS.textSecondary }}
             axisLine={false}
             tickLine={false}
             width={110}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#18181b",
-              border: "1px solid #3f3f46",
-              borderRadius: "8px",
+              backgroundColor: TOOLTIP_STYLE.backgroundColor,
+              border: `1px solid ${TOOLTIP_STYLE.borderColor}`,
+              borderRadius: TOOLTIP_STYLE.borderRadius,
               fontSize: "12px",
             }}
             formatter={(value) => [`$${Number(value).toFixed(2)}`, "Cost"]}

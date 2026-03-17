@@ -61,43 +61,43 @@ export function RecentSessionsTable() {
     >
       <Table>
         <TableHeader>
-          <TableRow className="border-zinc-800 hover:bg-transparent">
-            <TableHead className="text-zinc-400 text-xs">Project</TableHead>
-            <TableHead className="text-zinc-400 text-xs">Summary</TableHead>
-            <TableHead className="text-zinc-400 text-xs text-right">Messages</TableHead>
-            <TableHead className="text-zinc-400 text-xs text-right">Duration</TableHead>
-            <TableHead className="text-zinc-400 text-xs text-right">Last Active</TableHead>
+          <TableRow className="border-[#3D3830] hover:bg-transparent">
+            <TableHead className="text-[#B8AFA5] text-xs">Project</TableHead>
+            <TableHead className="text-[#B8AFA5] text-xs">Summary</TableHead>
+            <TableHead className="text-[#B8AFA5] text-xs text-right">Messages</TableHead>
+            <TableHead className="text-[#B8AFA5] text-xs text-right">Duration</TableHead>
+            <TableHead className="text-[#B8AFA5] text-xs text-right">Last Active</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {sessions.map((session) => (
             <TableRow
               key={session.sessionId}
-              className="border-zinc-800/50 hover:bg-zinc-800/30"
+              className="border-[#302C26] hover:bg-[#2D2822]/50"
             >
-              <TableCell className="text-zinc-300 text-xs font-medium">
+              <TableCell className="text-[#F5F0EB] text-xs font-medium">
                 <div className="flex items-center gap-2">
                   {session.projectName}
                   {session.isActive && (
                     <Badge
                       variant="outline"
-                      className="text-emerald-400 border-emerald-500/30 text-[10px] px-1.5 py-0"
+                      className="text-[#E8956A] border-[#D4714E]/30 text-[10px] px-1.5 py-0"
                     >
                       active
                     </Badge>
                   )}
                 </div>
               </TableCell>
-              <TableCell className="text-zinc-400 text-xs max-w-[300px]">
+              <TableCell className="text-[#B8AFA5] text-xs max-w-[300px]">
                 {truncate(session.summary || session.firstPrompt || "No summary", 80)}
               </TableCell>
-              <TableCell className="text-zinc-300 text-xs text-right tabular-nums">
+              <TableCell className="text-[#F5F0EB] text-xs text-right tabular-nums">
                 {session.messageCount}
               </TableCell>
-              <TableCell className="text-zinc-400 text-xs text-right tabular-nums">
+              <TableCell className="text-[#B8AFA5] text-xs text-right tabular-nums">
                 {formatDuration(session.created, session.modified)}
               </TableCell>
-              <TableCell className="text-zinc-500 text-xs text-right">
+              <TableCell className="text-[#7A7267] text-xs text-right">
                 {formatRelativeTime(session.modified)}
               </TableCell>
             </TableRow>

@@ -2,6 +2,7 @@
 
 import { useMemo } from "react"
 import { ChartContainer } from "@/components/charts/chart-container"
+import { CLAUDE_COLORS } from "@/lib/theme"
 
 interface PeakHoursChartProps {
   readonly hourCounts: Readonly<Record<string, number>>
@@ -80,14 +81,14 @@ export function PeakHoursChart({ hourCounts }: PeakHoursChartProps) {
             const opacity = count === 0 ? 0.15 : 0.3 + intensity * 0.7
             const color =
               count === 0
-                ? "#3f3f46"
+                ? CLAUDE_COLORS.borderDefault
                 : intensity > 0.75
-                  ? "#34d399"
+                  ? CLAUDE_COLORS.primaryLight
                   : intensity > 0.5
-                    ? "#10b981"
+                    ? CLAUDE_COLORS.primary
                     : intensity > 0.25
-                      ? "#059669"
-                      : "#047857"
+                      ? CLAUDE_COLORS.primaryDark
+                      : "#8B4D30"
 
             const labelAngle = startAngle + 7
             const labelPos = polarToCartesian(cx, cy, maxOuterRadius + 10, labelAngle)
@@ -98,7 +99,7 @@ export function PeakHoursChart({ hourCounts }: PeakHoursChartProps) {
                   d={describeArc(cx, cy, innerRadius, outerR, startAngle, endAngle)}
                   fill={color}
                   opacity={opacity}
-                  stroke="#18181b"
+                  stroke={CLAUDE_COLORS.bgRoot}
                   strokeWidth={1}
                 >
                   <title>
@@ -111,7 +112,7 @@ export function PeakHoursChart({ hourCounts }: PeakHoursChartProps) {
                     y={labelPos.y}
                     textAnchor="middle"
                     dominantBaseline="central"
-                    fill="#71717a"
+                    fill={CLAUDE_COLORS.textMuted}
                     fontSize="9"
                   >
                     {`${hour.toString().padStart(2, "0")}h`}
@@ -124,7 +125,7 @@ export function PeakHoursChart({ hourCounts }: PeakHoursChartProps) {
             x={cx}
             y={cy - 8}
             textAnchor="middle"
-            fill="#e4e4e7"
+            fill={CLAUDE_COLORS.textPrimary}
             fontSize="16"
             fontWeight="bold"
           >
@@ -134,7 +135,7 @@ export function PeakHoursChart({ hourCounts }: PeakHoursChartProps) {
             x={cx}
             y={cy + 10}
             textAnchor="middle"
-            fill="#71717a"
+            fill={CLAUDE_COLORS.textMuted}
             fontSize="10"
           >
             sessions

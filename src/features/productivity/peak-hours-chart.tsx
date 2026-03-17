@@ -59,9 +59,9 @@ function CustomTooltip({
           : `${hour - 12}:00 PM`
 
   return (
-    <div className="bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-xs shadow-lg">
-      <div className="font-medium text-zinc-200 mb-1">{timeStr}</div>
-      <div className="text-zinc-400">{payload[0].value} sessions</div>
+    <div className="bg-[#2D2822] border border-[#3D3830] rounded-md px-3 py-2 text-xs shadow-lg">
+      <div className="font-medium text-[#F5F0EB] mb-1">{timeStr}</div>
+      <div className="text-[#B8AFA5]">{payload[0].value} sessions</div>
     </div>
   )
 }
@@ -82,16 +82,16 @@ export function PeakHoursChart({
     >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#302C26" vertical={false} />
           <XAxis
             dataKey="label"
-            tick={{ fill: "#71717a", fontSize: 10 }}
+            tick={{ fill: "#7A7267", fontSize: 10 }}
             tickLine={false}
             axisLine={false}
             interval={2}
           />
           <YAxis
-            tick={{ fill: "#71717a", fontSize: 11 }}
+            tick={{ fill: "#7A7267", fontSize: 11 }}
             tickLine={false}
             axisLine={false}
           />

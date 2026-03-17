@@ -2,6 +2,8 @@
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts"
 import { ChartContainer } from "@/components/charts/chart-container"
+import { TOOLTIP_STYLE } from "@/components/charts/recharts-theme"
+import { CLAUDE_COLORS } from "@/lib/theme"
 import type { ModelSpendEntry } from "./use-cost-data"
 
 interface ModelDonutChartProps {
@@ -38,9 +40,9 @@ export function ModelDonutChart({ data, isLoading, totalCost }: ModelDonutChartP
           </Pie>
           <Tooltip
             contentStyle={{
-              backgroundColor: "#18181b",
-              border: "1px solid #3f3f46",
-              borderRadius: "8px",
+              backgroundColor: TOOLTIP_STYLE.backgroundColor,
+              border: `1px solid ${TOOLTIP_STYLE.borderColor}`,
+              borderRadius: TOOLTIP_STYLE.borderRadius,
               fontSize: "12px",
             }}
             formatter={(value) => [`$${Number(value).toFixed(2)}`, "Cost"]}
@@ -51,7 +53,7 @@ export function ModelDonutChart({ data, isLoading, totalCost }: ModelDonutChartP
             y="47%"
             textAnchor="middle"
             dominantBaseline="middle"
-            className="fill-zinc-100"
+            fill={CLAUDE_COLORS.textPrimary}
             style={{ fontSize: "20px", fontWeight: 700 }}
           >
             ${totalCost.toFixed(0)}
@@ -61,7 +63,7 @@ export function ModelDonutChart({ data, isLoading, totalCost }: ModelDonutChartP
             y="57%"
             textAnchor="middle"
             dominantBaseline="middle"
-            className="fill-zinc-500"
+            fill={CLAUDE_COLORS.textMuted}
             style={{ fontSize: "11px" }}
           >
             total spend
@@ -76,7 +78,7 @@ export function ModelDonutChart({ data, isLoading, totalCost }: ModelDonutChartP
               className="w-2.5 h-2.5 rounded-full inline-block"
               style={{ backgroundColor: entry.color }}
             />
-            <span className="text-xs text-zinc-400">{entry.displayName}</span>
+            <span className="text-xs" style={{ color: CLAUDE_COLORS.textSecondary }}>{entry.displayName}</span>
           </div>
         ))}
       </div>

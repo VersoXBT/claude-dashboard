@@ -14,8 +14,8 @@ export default function LivePage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-xl font-semibold text-zinc-100">Live Monitor</h1>
-          <p className="text-sm text-zinc-500 mt-1">
+          <h1 className="text-xl font-semibold text-[#F5F0EB]">Live Monitor</h1>
+          <p className="text-sm text-[#7A7267] mt-1">
             Real-time active session monitoring
           </p>
         </div>
@@ -32,18 +32,18 @@ export default function LivePage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-zinc-100">Live Monitor</h1>
-          <p className="text-sm text-zinc-500 mt-1">
+          <h1 className="text-xl font-semibold text-[#F5F0EB]">Live Monitor</h1>
+          <p className="text-sm text-[#7A7267] mt-1">
             Real-time active session monitoring
           </p>
         </div>
         {sessions.length > 0 && (
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#D4714E]/10 border border-[#D4714E]/20">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E8956A] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D4714E]" />
             </span>
-            <span className="text-xs font-medium text-emerald-400">
+            <span className="text-xs font-medium text-[#E8956A]">
               {sessions.length} active
             </span>
           </div>

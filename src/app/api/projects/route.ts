@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { scanClaudeData } from "@/lib/scanner"
-import { parseSessionIndex } from "@/lib/parser"
+import { parseSessionIndex, parseStatsCache } from "@/lib/parser"
+import { calculateCostBreakdown } from "@/lib/costs"
 import { decodeProjectDirName } from "@/lib/claude-home"
 import type { ProjectResponse } from "@/lib/types"
 
@@ -8,6 +9,23 @@ export async function GET() {
   try {
     const scan = await scanClaudeData()
     const projects: ProjectResponse[] = []
+
+    // Calculate average cost per message from stats cache
+    let avgCostPerMessage = 0
+    if (scan.statsCachePath) {
+      try {
+        const stats = await parseStatsCache(scan.statsCachePath)
+        const costBreakdown = calculateCostBreakdown(
+          stats.modelUsage as Record<string, (typeof stats.modelUsage)[string]>,
+          stats.dailyModelTokens
+        )
+        avgCostPerMessage = stats.totalMessages > 0
+          ? costBreakdown.totalCost / stats.totalMessages
+          : 0
+      } catch {
+        // Fall back to 0
+      }
+    }
 
     for (const project of scan.projects) {
       const name = decodeProjectDirName(project.dirName)
@@ -39,7 +57,7 @@ export async function GET() {
         sessionCount,
         totalMessages,
         lastActivity,
-        estimatedCost: 0,
+        estimatedCost: totalMessages * avgCostPerMessage,
       })
     }
 

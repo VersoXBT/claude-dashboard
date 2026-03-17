@@ -28,12 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-950 text-zinc-100`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
         <TooltipProvider>
           <SidebarProvider>
             <AppSidebar />
-            <SidebarInset className="bg-zinc-950">
+            <SidebarInset className="bg-background">
               <main className="flex-1 p-6 overflow-auto">
                 {children}
               </main>

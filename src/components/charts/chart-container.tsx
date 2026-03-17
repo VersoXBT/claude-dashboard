@@ -23,15 +23,16 @@ export function ChartContainer({
   actions,
 }: ChartContainerProps) {
   return (
-    <Card className="bg-zinc-900/50 border-zinc-800">
+    <Card className="relative overflow-hidden border-border bg-card">
+      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-[#D4714E] via-[#D4A04E] to-[#D4714E] opacity-40" />
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-sm font-medium text-zinc-300">
+            <CardTitle className="text-sm font-semibold text-foreground">
               {title}
             </CardTitle>
             {subtitle && (
-              <p className="text-xs text-zinc-500 mt-0.5">{subtitle}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">{subtitle}</p>
             )}
           </div>
           {actions && <div className="flex items-center gap-2">{actions}</div>}
@@ -41,11 +42,11 @@ export function ChartContainer({
         <div className={height}>
           {isLoading ? (
             <div className="flex items-center justify-center h-full">
-              <Skeleton className="w-full h-full rounded-lg" />
+              <Skeleton className="w-full h-full rounded-lg bg-[#2D2822]" />
             </div>
           ) : isEmpty ? (
             <div className="flex items-center justify-center h-full">
-              <p className="text-sm text-zinc-500">No data available</p>
+              <p className="text-sm text-muted-foreground">No data available</p>
             </div>
           ) : (
             children

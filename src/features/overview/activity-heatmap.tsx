@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react"
 import { ChartContainer } from "@/components/charts/chart-container"
+import { HEATMAP_COLORS } from "@/components/charts/recharts-theme"
+import { CLAUDE_COLORS } from "@/lib/theme"
 import type { DailyActivity } from "@/lib/types"
 
 interface ActivityHeatmapProps {
@@ -26,14 +28,6 @@ function getLevel(value: number, max: number): number {
   if (ratio <= 0.75) return 3
   return 4
 }
-
-const LEVEL_CLASSES = [
-  "bg-zinc-800",
-  "bg-emerald-900/40",
-  "bg-emerald-700/50",
-  "bg-emerald-500/60",
-  "bg-emerald-400/80",
-] as const
 
 const DAY_LABELS = ["", "Mon", "", "Wed", "", "Fri", ""] as const
 
@@ -126,7 +120,7 @@ export function ActivityHeatmap({ dailyActivity }: ActivityHeatmapProps) {
       isEmpty={dailyActivity.length === 0}
     >
       <div className="relative flex flex-col gap-1 h-full overflow-x-auto">
-        <div className="flex gap-[3px] ml-8 text-[10px] text-zinc-500 mb-1">
+        <div className="flex gap-[3px] ml-8 text-[10px] text-[#7A7267] mb-1">
           {monthLabels.map((m, i) => (
             <span
               key={`${m.label}-${i}`}
@@ -141,7 +135,7 @@ export function ActivityHeatmap({ dailyActivity }: ActivityHeatmapProps) {
         </div>
 
         <div className="flex gap-[3px] mt-4">
-          <div className="flex flex-col gap-[3px] text-[10px] text-zinc-500 mr-1 shrink-0">
+          <div className="flex flex-col gap-[3px] text-[10px] text-[#7A7267] mr-1 shrink-0">
             {DAY_LABELS.map((label, i) => (
               <div key={i} className="h-[12px] flex items-center justify-end w-6">
                 {label}
@@ -155,7 +149,7 @@ export function ActivityHeatmap({ dailyActivity }: ActivityHeatmapProps) {
                 {week.map((day) => (
                   <div
                     key={day.date}
-                    className={`w-[12px] h-[12px] rounded-[2px] ${LEVEL_CLASSES[day.level]} cursor-pointer transition-all hover:ring-1 hover:ring-zinc-400`}
+                    className={`w-[12px] h-[12px] rounded-[2px] ${HEATMAP_COLORS[day.level]} cursor-pointer transition-all hover:ring-1 hover:ring-[#D4714E]/50`}
                     onMouseEnter={(e) => {
                       setHoveredCell(day)
                       const rect = e.currentTarget.getBoundingClientRect()
@@ -175,9 +169,9 @@ export function ActivityHeatmap({ dailyActivity }: ActivityHeatmapProps) {
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 mt-auto text-[10px] text-zinc-500 ml-8">
+        <div className="flex items-center gap-1.5 mt-auto text-[10px] text-[#7A7267] ml-8">
           <span>Less</span>
-          {LEVEL_CLASSES.map((cls, i) => (
+          {HEATMAP_COLORS.map((cls, i) => (
             <div key={i} className={`w-[12px] h-[12px] rounded-[2px] ${cls}`} />
           ))}
           <span>More</span>
@@ -185,13 +179,18 @@ export function ActivityHeatmap({ dailyActivity }: ActivityHeatmapProps) {
 
         {hoveredCell && (
           <div
-            className="absolute z-50 pointer-events-none bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-xs shadow-lg"
-            style={{ left: tooltipPos.x, top: tooltipPos.y }}
+            className="absolute z-50 pointer-events-none rounded-md px-3 py-2 text-xs shadow-lg"
+            style={{
+              left: tooltipPos.x,
+              top: tooltipPos.y,
+              backgroundColor: CLAUDE_COLORS.bgElevated,
+              border: `1px solid ${CLAUDE_COLORS.borderDefault}`,
+            }}
           >
-            <div className="font-medium text-zinc-200">
+            <div className="font-medium" style={{ color: CLAUDE_COLORS.textPrimary }}>
               {formatDate(hoveredCell.date)}
             </div>
-            <div className="text-zinc-400 mt-1 space-y-0.5">
+            <div className="mt-1 space-y-0.5" style={{ color: CLAUDE_COLORS.textSecondary }}>
               <div>{hoveredCell.messages} messages</div>
               <div>{hoveredCell.sessions} sessions</div>
               <div>{hoveredCell.toolCalls} tool calls</div>

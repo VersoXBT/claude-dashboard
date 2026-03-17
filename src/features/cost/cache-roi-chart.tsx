@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts"
 import { ChartContainer } from "@/components/charts/chart-container"
-import { CHART_COLORS } from "@/components/charts/recharts-theme"
+import { CHART_COLORS, CHART_GRID_COLOR, CHART_AXIS_COLOR, TOOLTIP_STYLE } from "@/components/charts/recharts-theme"
 import type { CacheRoiEntry } from "./use-cost-data"
 
 interface CacheRoiChartProps {
@@ -37,11 +37,11 @@ export function CacheRoiChart({ data, isLoading }: CacheRoiChartProps) {
     >
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={sliced} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID_COLOR} vertical={false} />
           <XAxis
             dataKey="date"
             tickFormatter={formatDate}
-            tick={{ fontSize: 10, fill: "#71717a" }}
+            tick={{ fontSize: 10, fill: CHART_AXIS_COLOR }}
             axisLine={false}
             tickLine={false}
             interval="preserveStartEnd"
@@ -49,7 +49,7 @@ export function CacheRoiChart({ data, isLoading }: CacheRoiChartProps) {
           <YAxis
             yAxisId="left"
             tickFormatter={(v: number) => `${v}%`}
-            tick={{ fontSize: 11, fill: "#71717a" }}
+            tick={{ fontSize: 11, fill: CHART_AXIS_COLOR }}
             axisLine={false}
             tickLine={false}
             width={45}
@@ -59,16 +59,16 @@ export function CacheRoiChart({ data, isLoading }: CacheRoiChartProps) {
             yAxisId="right"
             orientation="right"
             tickFormatter={(v: number) => `$${v.toFixed(0)}`}
-            tick={{ fontSize: 11, fill: "#71717a" }}
+            tick={{ fontSize: 11, fill: CHART_AXIS_COLOR }}
             axisLine={false}
             tickLine={false}
             width={50}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#18181b",
-              border: "1px solid #3f3f46",
-              borderRadius: "8px",
+              backgroundColor: TOOLTIP_STYLE.backgroundColor,
+              border: `1px solid ${TOOLTIP_STYLE.borderColor}`,
+              borderRadius: TOOLTIP_STYLE.borderRadius,
               fontSize: "12px",
             }}
             labelFormatter={(label) => formatDate(String(label))}

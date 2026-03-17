@@ -47,22 +47,22 @@ export function AppSidebar() {
   }
 
   return (
-    <Sidebar className="border-r border-zinc-800/50 bg-zinc-950">
+    <Sidebar className="border-r border-[#302C26] bg-sidebar">
       <SidebarHeader className="p-4">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-blue-500">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#D4714E] to-[#D4A04E] shadow-lg shadow-[#D4714E]/20">
             <Terminal className="h-4 w-4 text-white" />
           </div>
           <div>
-            <h1 className="text-sm font-semibold text-zinc-100">Claude Dashboard</h1>
-            <p className="text-[10px] text-zinc-500">Usage Analytics</p>
+            <h1 className="text-sm font-semibold text-foreground">Claude Dashboard</h1>
+            <p className="text-[10px] text-[#7A7267]">Usage Analytics</p>
           </div>
         </Link>
       </SidebarHeader>
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-[10px] uppercase tracking-wider text-zinc-500">
+          <SidebarGroupLabel className="text-[10px] uppercase tracking-wider text-[#7A7267]">
             Analytics
           </SidebarGroupLabel>
           <SidebarMenu>
@@ -81,7 +81,7 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel className="text-[10px] uppercase tracking-wider text-zinc-500">
+          <SidebarGroupLabel className="text-[10px] uppercase tracking-wider text-[#7A7267]">
             Sessions
           </SidebarGroupLabel>
           <SidebarMenu>
@@ -100,7 +100,7 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel className="text-[10px] uppercase tracking-wider text-zinc-500">
+          <SidebarGroupLabel className="text-[10px] uppercase tracking-wider text-[#7A7267]">
             Projects
           </SidebarGroupLabel>
           <SidebarMenu>
@@ -131,7 +131,7 @@ export function AppSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-        <p className="text-[10px] text-zinc-600 mt-2 px-2">v0.1.0</p>
+        <p className="text-[10px] text-[#564F47] mt-2 px-2">v0.1.0</p>
       </SidebarFooter>
     </Sidebar>
   )

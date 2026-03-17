@@ -238,6 +238,17 @@ export interface SessionDetail {
   readonly totalTokens: TokenSummary
   readonly estimatedCost: number
   readonly toolCalls: readonly ToolCallSummary[]
+  readonly modelsUsed: readonly string[]
+  readonly webSearchCount: number
+}
+
+export interface DashboardSettings {
+  readonly claudeHome: string
+  readonly totalProjects: number
+  readonly totalSessionFiles: number
+  readonly firstSessionDate: string
+  readonly totalStorageBytes: number
+  readonly version: string
 }
 
 export interface ParsedMessage {

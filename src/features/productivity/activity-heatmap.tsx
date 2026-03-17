@@ -17,15 +17,15 @@ interface CellData {
   readonly level: number
 }
 
-function getIntensityClass(level: number): string {
-  const classes = [
-    "bg-zinc-800",
-    "bg-emerald-900/40",
-    "bg-emerald-700/50",
-    "bg-emerald-500/60",
-    "bg-emerald-400/80",
+function getIntensityColor(level: number): string {
+  const colors = [
+    "#231F1B",
+    "rgba(212, 113, 78, 0.15)",
+    "rgba(212, 113, 78, 0.3)",
+    "rgba(212, 113, 78, 0.5)",
+    "rgba(212, 113, 78, 0.8)",
   ] as const
-  return classes[level] ?? classes[0]
+  return colors[level] ?? colors[0]
 }
 
 function buildHeatmapGrid(
@@ -138,14 +138,14 @@ export function ActivityHeatmap({
 
   if (isLoading) {
     return (
-      <Card className="bg-zinc-900/50 border-zinc-800">
+      <Card className="bg-[#231F1B] border-[#3D3830]">
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium text-zinc-300">
+          <CardTitle className="text-sm font-medium text-[#B8AFA5]">
             Activity Heatmap
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4 pt-0">
-          <div className="h-[140px] animate-pulse bg-zinc-800/50 rounded-lg" />
+          <div className="h-[140px] animate-pulse bg-[#2D2822]/50 rounded-lg" />
         </CardContent>
       </Card>
     )
@@ -154,18 +154,19 @@ export function ActivityHeatmap({
   const dayLabels = ["", "Mon", "", "Wed", "", "Fri", ""]
 
   return (
-    <Card className="bg-zinc-900/50 border-zinc-800">
+    <Card className="bg-[#231F1B] border-[#3D3830]">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-sm font-medium text-zinc-300">
+          <CardTitle className="text-sm font-medium text-[#B8AFA5]">
             Activity Heatmap
           </CardTitle>
-          <div className="flex items-center gap-1.5 text-xs text-zinc-500">
+          <div className="flex items-center gap-1.5 text-xs text-[#7A7267]">
             <span>Less</span>
             {[0, 1, 2, 3, 4].map((level) => (
               <div
                 key={level}
-                className={`w-2.5 h-2.5 rounded-sm ${getIntensityClass(level)}`}
+                className="w-2.5 h-2.5 rounded-sm"
+                style={{ backgroundColor: getIntensityColor(level) }}
               />
             ))}
             <span>More</span>
@@ -178,7 +179,7 @@ export function ActivityHeatmap({
           {monthLabels.map(({ label, col }) => (
             <span
               key={`${label}-${col}`}
-              className="text-[10px] text-zinc-500 absolute"
+              className="text-[10px] text-[#7A7267] absolute"
               style={{ left: `${col * 14 + 32}px` }}
             >
               {label}
@@ -192,7 +193,7 @@ export function ActivityHeatmap({
             {dayLabels.map((label, i) => (
               <div
                 key={i}
-                className="h-[11px] text-[10px] text-zinc-500 leading-[11px] w-6 text-right pr-1"
+                className="h-[11px] text-[10px] text-[#7A7267] leading-[11px] w-6 text-right pr-1"
               >
                 {label}
               </div>
@@ -206,7 +207,8 @@ export function ActivityHeatmap({
                 {week.map((cell, dayIdx) => (
                   <div
                     key={`${weekIdx}-${dayIdx}`}
-                    className={`w-[11px] h-[11px] rounded-sm ${getIntensityClass(cell.level)} cursor-pointer transition-colors hover:ring-1 hover:ring-zinc-500`}
+                    className="w-[11px] h-[11px] rounded-sm cursor-pointer transition-colors hover:ring-1 hover:ring-[#D4714E]/50"
+                    style={{ backgroundColor: getIntensityColor(cell.level) }}
                     onMouseEnter={(e) => {
                       setHoveredCell(cell)
                       const rect = e.currentTarget.getBoundingClientRect()
@@ -228,17 +230,17 @@ export function ActivityHeatmap({
         {/* Custom tooltip */}
         {hoveredCell && (
           <div
-            className="absolute z-50 pointer-events-none bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-xs shadow-lg"
+            className="absolute z-50 pointer-events-none bg-[#2D2822] border border-[#3D3830] rounded-md px-3 py-2 text-xs shadow-lg"
             style={{
               left: `${tooltipPos.x}px`,
               top: `${tooltipPos.y - 8}px`,
               transform: "translate(-50%, -100%)",
             }}
           >
-            <div className="font-medium text-zinc-200 mb-1">
+            <div className="font-medium text-[#F5F0EB] mb-1">
               {formatDate(hoveredCell.date)}
             </div>
-            <div className="text-zinc-400 space-y-0.5">
+            <div className="text-[#B8AFA5] space-y-0.5">
               <div>{hoveredCell.messageCount} messages</div>
               <div>{hoveredCell.sessionCount} sessions</div>
               <div>{hoveredCell.toolCallCount} tool calls</div>

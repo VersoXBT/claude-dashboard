@@ -82,11 +82,11 @@ function CustomTooltip({
   if (!active || !payload?.length) return null
 
   return (
-    <div className="bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-xs shadow-lg">
-      <div className="font-medium text-zinc-200 mb-1">
+    <div className="bg-[#2D2822] border border-[#3D3830] rounded-md px-3 py-2 text-xs shadow-lg">
+      <div className="font-medium text-[#F5F0EB] mb-1">
         {payload[0].payload.name}
       </div>
-      <div className="text-zinc-400">{payload[0].value} invocations</div>
+      <div className="text-[#B8AFA5]">{payload[0].value} invocations</div>
     </div>
   )
 }
@@ -107,17 +107,17 @@ export function ToolFrequencyChart({
     >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} layout="vertical" margin={{ left: 20 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#27272a" horizontal={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#302C26" horizontal={false} />
           <XAxis
             type="number"
-            tick={{ fill: "#71717a", fontSize: 11 }}
+            tick={{ fill: "#7A7267", fontSize: 11 }}
             tickLine={false}
             axisLine={false}
           />
           <YAxis
             type="category"
             dataKey="name"
-            tick={{ fill: "#d4d4d8", fontSize: 12 }}
+            tick={{ fill: "#B8AFA5", fontSize: 12 }}
             tickLine={false}
             axisLine={false}
             width={90}

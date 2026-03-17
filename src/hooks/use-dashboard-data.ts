@@ -1,7 +1,7 @@
 "use client"
 
 import useSWR from "swr"
-import type { StatsResponse, SessionListItem, ProjectResponse, ActiveSession, HistoryEntry } from "@/lib/types"
+import type { StatsResponse, SessionListItem, ProjectResponse, ActiveSession, HistoryEntry, DashboardSettings } from "@/lib/types"
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
@@ -68,4 +68,10 @@ export function useHistory(limit = 100) {
     fetcher,
     { refreshInterval: 10_000 }
   )
+}
+
+export function useSettings() {
+  return useSWR<DashboardSettings>("/api/settings", fetcher, {
+    revalidateOnFocus: false,
+  })
 }

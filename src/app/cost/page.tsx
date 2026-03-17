@@ -35,8 +35,8 @@ export default function CostPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-xl font-semibold text-zinc-100">Cost & Tokens</h1>
-          <p className="text-sm text-zinc-500 mt-1">Financial analytics and token usage breakdown</p>
+          <h1 className="text-xl font-semibold text-[#F5F0EB]">Cost & Tokens</h1>
+          <p className="text-sm text-[#7A7267] mt-1">Financial analytics and token usage breakdown</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
           {Array.from({ length: 5 }).map((_, i) => (
@@ -54,8 +54,8 @@ export default function CostPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-semibold text-zinc-100">Cost & Tokens</h1>
-        <p className="text-sm text-zinc-500 mt-1">Financial analytics and token usage breakdown</p>
+        <h1 className="text-xl font-semibold text-[#F5F0EB]">Cost & Tokens</h1>
+        <p className="text-sm text-[#7A7267] mt-1">Financial analytics and token usage breakdown</p>
       </div>
 
       {/* Row 1: KPI Cards */}

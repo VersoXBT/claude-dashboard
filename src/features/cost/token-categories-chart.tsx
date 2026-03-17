@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts"
 import { ChartContainer } from "@/components/charts/chart-container"
-import { TOKEN_COLORS } from "@/components/charts/recharts-theme"
+import { TOKEN_COLORS, CHART_GRID_COLOR, CHART_AXIS_COLOR, TOOLTIP_STYLE } from "@/components/charts/recharts-theme"
 import type { TokenCategoryEntry } from "./use-cost-data"
 
 interface TokenCategoriesChartProps {
@@ -30,7 +30,6 @@ function formatTokens(n: number): string {
 }
 
 export function TokenCategoriesChart({ data, isLoading }: TokenCategoriesChartProps) {
-  // Show last 30 days to avoid overcrowding
   const sliced = data.slice(-30)
 
   return (
@@ -43,27 +42,27 @@ export function TokenCategoriesChart({ data, isLoading }: TokenCategoriesChartPr
     >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={sliced} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID_COLOR} vertical={false} />
           <XAxis
             dataKey="date"
             tickFormatter={formatDate}
-            tick={{ fontSize: 10, fill: "#71717a" }}
+            tick={{ fontSize: 10, fill: CHART_AXIS_COLOR }}
             axisLine={false}
             tickLine={false}
             interval="preserveStartEnd"
           />
           <YAxis
             tickFormatter={formatTokens}
-            tick={{ fontSize: 11, fill: "#71717a" }}
+            tick={{ fontSize: 11, fill: CHART_AXIS_COLOR }}
             axisLine={false}
             tickLine={false}
             width={50}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#18181b",
-              border: "1px solid #3f3f46",
-              borderRadius: "8px",
+              backgroundColor: TOOLTIP_STYLE.backgroundColor,
+              border: `1px solid ${TOOLTIP_STYLE.borderColor}`,
+              borderRadius: TOOLTIP_STYLE.borderRadius,
               fontSize: "12px",
             }}
             labelFormatter={(label) => formatDate(String(label))}

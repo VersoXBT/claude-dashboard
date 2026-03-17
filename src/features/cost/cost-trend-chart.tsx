@@ -12,7 +12,8 @@ import {
   ResponsiveContainer,
 } from "recharts"
 import { ChartContainer } from "@/components/charts/chart-container"
-import { CHART_COLORS } from "@/components/charts/recharts-theme"
+import { CHART_COLORS, CHART_GRID_COLOR, CHART_AXIS_COLOR, TOOLTIP_STYLE } from "@/components/charts/recharts-theme"
+import { CLAUDE_COLORS } from "@/lib/theme"
 import type { DailyCostEntry } from "./use-cost-data"
 
 interface CostTrendChartProps {
@@ -65,8 +66,8 @@ export function CostTrendChart({ data, isLoading }: CostTrendChartProps) {
               onClick={() => setRange(btn.value)}
               className={`px-2 py-0.5 text-xs rounded transition-colors ${
                 range === btn.value
-                  ? "bg-zinc-700 text-zinc-100"
-                  : "text-zinc-500 hover:text-zinc-300"
+                  ? "bg-[#D4714E] text-[#F5F0EB]"
+                  : "text-[#7A7267] hover:text-[#F5F0EB]"
               }`}
             >
               {btn.label}
@@ -83,27 +84,27 @@ export function CostTrendChart({ data, isLoading }: CostTrendChartProps) {
               <stop offset="100%" stopColor={CHART_COLORS.primary} stopOpacity={0.02} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID_COLOR} vertical={false} />
           <XAxis
             dataKey="date"
             tickFormatter={formatDate}
-            tick={{ fontSize: 11, fill: "#71717a" }}
+            tick={{ fontSize: 11, fill: CHART_AXIS_COLOR }}
             axisLine={false}
             tickLine={false}
             interval="preserveStartEnd"
           />
           <YAxis
             tickFormatter={(v: number) => `$${v.toFixed(0)}`}
-            tick={{ fontSize: 11, fill: "#71717a" }}
+            tick={{ fontSize: 11, fill: CHART_AXIS_COLOR }}
             axisLine={false}
             tickLine={false}
             width={50}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#18181b",
-              border: "1px solid #3f3f46",
-              borderRadius: "8px",
+              backgroundColor: TOOLTIP_STYLE.backgroundColor,
+              border: `1px solid ${TOOLTIP_STYLE.borderColor}`,
+              borderRadius: TOOLTIP_STYLE.borderRadius,
               fontSize: "12px",
             }}
             labelFormatter={(label) => formatDate(String(label))}
