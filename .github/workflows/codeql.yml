@@ -38,7 +38,7 @@ jobs:
         # queries: security-and-quality
 
     - name: Autobuild
-      uses: github/codeql-action/autobuild@0d579ffd059c29b07949a3cce3983f0780820c98 # v4
+      uses: github/codeql-action/autobuild@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@0d579ffd059c29b07949a3cce3983f0780820c98 # v4
